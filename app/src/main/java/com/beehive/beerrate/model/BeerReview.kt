@@ -1,8 +1,12 @@
 package com.beehive.beerrate.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity
 data class BeerReview(
+    @PrimaryKey val uid: Int,
     val objectId: String,
     val beer: Beer,
     val id: String,
