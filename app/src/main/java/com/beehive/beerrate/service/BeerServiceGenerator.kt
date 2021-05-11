@@ -4,7 +4,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object BeerServiceFactory {
+object BeerServiceGenerator {
     private const val BASE_URL = "https://simonmdsn.com/api/"
 
     // Beer API credentials. Using the basic access authentication method.
@@ -24,6 +24,6 @@ object BeerServiceFactory {
         }
         builder.client(httpClient.build())
         retrofit = builder.build()
-        return retrofit.create(serviceClass);
+        return retrofit.create(serviceClass!!);
     }
 }
