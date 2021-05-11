@@ -8,26 +8,26 @@ import retrofit2.http.Path
 interface BeerService {
 
     @GET("beers")
-    fun getBeers(): Call<EmbeddedBeerList>
+    suspend fun getBeers(): EmbeddedBeerList
 
     @GET("beers/{objectId}")
-    fun getBeerByObjectId(@Path("objectId") objectId: String): Call<Beer>
+    suspend fun getBeerByObjectId(@Path("objectId") objectId: String): Beer
 
     @GET("beerstyles")
-    fun getBeerStyles(): Call<EmbeddedBeerStyleList>
+    suspend fun getBeerStyles(): EmbeddedBeerStyleList
 
     @GET("beerstyles/{objectId}")
-    fun getBeerStyleByObjectId(@Path("objectId") objectId: String): Call<BeerStyle>
+    suspend fun getBeerStyleByObjectId(@Path("objectId") objectId: String): BeerStyle
 
     @GET("beerreviews")
-    fun getBeerReviews(): Call<EmbeddedBeerReviewList>
+    suspend fun getBeerReviews(): EmbeddedBeerReviewList
 
     @GET("beerreviews/{objectId}")
-    fun getBeerReviewByObjectId(@Path("objectId") objectId: String): Call<BeerReview>
+    suspend fun getBeerReviewByObjectId(@Path("objectId") objectId: String): BeerReview
 
     @GET("beertypes")
-    fun getBeerTypes(): Call<EmbeddedBeerTypeList>
+    suspend fun getBeerTypes(): EmbeddedBeerTypeList
 
     @GET("beertypes/{objectId}")
-    fun getBeerTypeByObjectId(@Path("objectId") objectId: String): Call<BeerType>
+    suspend fun getBeerTypeByObjectId(@Path("objectId") objectId: String): BeerType
 }

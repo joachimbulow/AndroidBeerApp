@@ -1,9 +1,16 @@
 package com.beehive.beerrate.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "beertypes")
 data class BeerType(
-    val objectId: String,
+    @PrimaryKey
+    @ColumnInfo(name = "beertype_id")
+    val uid: Int,
+    val preferred: Boolean,
     val type: String
 )
 
