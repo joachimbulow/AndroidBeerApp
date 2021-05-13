@@ -18,7 +18,7 @@ data class BeerStyle(
     val description: String,
     @ColumnInfo(name = "beertype_id")
     val beerTypeId: Int,
-    val preferred: Boolean
+    var preferred: Boolean
 )
 
 data class EmbeddedBeerStyleList(

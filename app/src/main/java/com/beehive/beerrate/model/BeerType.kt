@@ -10,7 +10,7 @@ data class BeerType(
     @PrimaryKey
     @ColumnInfo(name = "beertype_id")
     val uid: Int,
-    val preferred: Boolean,
+    var preferred: Boolean,
     val type: String
 )
 

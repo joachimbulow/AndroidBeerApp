@@ -23,7 +23,6 @@ object AppModule {
     fun provideBeerPreferenceDatabase(@ApplicationContext app: Context) =
         Room.databaseBuilder(app, BeerPreferenceDatabase::class.java, "beerdb")
             .createFromAsset("database/beerdb.db")
-            .allowMainThreadQueries()
             .build()
 
     @Singleton

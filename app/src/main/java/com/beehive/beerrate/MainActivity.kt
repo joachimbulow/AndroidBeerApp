@@ -1,6 +1,5 @@
 package com.beehive.beerrate
 
-import android.content.Context
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -8,8 +7,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.room.Room
-import com.beehive.beerrate.database.BeerPreferenceDatabase
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

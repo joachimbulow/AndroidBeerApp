@@ -13,9 +13,12 @@ class BeerStyleAdapter(var beerStyles: List<BeerStyle>) :
 
     inner class BeerStyleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val beerStyleTextView: TextView = itemView.findViewById(R.id.beer_style_textView)
+        private val beerStyleDescriptionTextView: TextView = itemView.findViewById(R.id.beer_style_description)
+
 
         fun bind(beerStyle: BeerStyle) {
             beerStyleTextView.text = beerStyle.name
+            beerStyleDescriptionTextView.text = beerStyle.description
         }
     }
 
