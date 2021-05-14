@@ -52,7 +52,6 @@ class PreferenceFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         preferenceViewModel.preferredBeerTypes.observe(viewLifecycleOwner, Observer {
             beerTypesRecyclerView.adapter =
                 BeerTypeAdapter(preferenceViewModel.preferredBeerTypes.value!!)

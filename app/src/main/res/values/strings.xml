@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">BeerRate</string>
     <string name="title_preferences">Preferences</string>
+    <string name="title_explore">Explore</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="types_of_beer">Types of beer</string>

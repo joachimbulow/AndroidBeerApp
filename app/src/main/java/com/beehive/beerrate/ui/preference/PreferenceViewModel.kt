@@ -1,7 +1,6 @@
 package com.beehive.beerrate.ui.preference
 
 import android.os.AsyncTask
-import android.util.Log
 import androidx.lifecycle.*
 import com.beehive.beerrate.model.BeerStyle
 import com.beehive.beerrate.model.BeerType
