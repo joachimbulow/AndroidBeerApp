@@ -14,7 +14,7 @@ class PreferenceViewModel @Inject constructor(private val beerPreferenceReposito
 
     val allBeerTypes = beerPreferenceRepository.getBeerTypes().asLiveData()
     val preferredBeerTypes = beerPreferenceRepository.getBeerTypePreferences().asLiveData()
-    val allBeerStyles = beerPreferenceRepository.getBeerStyles().asLiveData()
+    val allBeerStyles = beerPreferenceRepository.getAllBasedOnPreferredBeerTypes().asLiveData()
     val preferredBeerStyles = beerPreferenceRepository.getBeerStylePreferences().asLiveData()
 
     fun updateBeerTypePreferences() {
@@ -62,8 +62,7 @@ class PreferenceViewModel @Inject constructor(private val beerPreferenceReposito
         ) : AsyncTask<BeerStyle, Void, Void>() {
             override fun doInBackground(vararg params: BeerStyle?): Void? {
                 for (beerStyle in params) {
-                    beerStyle!!.preferred = false
-                    beerPreferenceRepository.updatePreferredBeerStyle(beerStyle)
+                    beerPreferenceRepository.updatePreferredBeerStyle(beerStyle!!)
                 }
                 return null
             }

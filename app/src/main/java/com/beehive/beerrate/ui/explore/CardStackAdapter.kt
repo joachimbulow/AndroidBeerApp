@@ -39,4 +39,8 @@ class CardStackAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         return holder.bind(beers[position])
     }
+
+    fun getItem(position: Int): Beer {
+        return beers[position]
+    }
 }

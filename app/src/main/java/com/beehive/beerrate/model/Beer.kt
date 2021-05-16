@@ -30,7 +30,7 @@ data class Beer(
     @ColumnInfo(name = "average_review")
     val averageReview: Double,
     val calories: Int,
-    val preferred: Int,
+    var preferred: Boolean,
     @ColumnInfo(name = "brewer_name")
     val brewerName: String,
     val name: String,

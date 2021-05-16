@@ -30,6 +30,10 @@ class BeerPreferenceRepository @Inject constructor(
         return beerStyleDao.getAll()
     }
 
+    fun getAllBasedOnPreferredBeerTypes(): Flow<List<BeerStyle>> {
+        return beerStyleDao.getAllBasedOnPreferredBeerTypes()
+    }
+
     fun getBeerStylePreferences(): Flow<List<BeerStyle>> {
         return beerStyleDao.getAllPreferred()
     }

@@ -8,4 +8,6 @@
     <string name="edit">Edit</string>
     <string name="styles_of_beer">Styles of beer</string>
     <string name="save">Save</string>
+    <string name="pref">pref</string>
+    <string name="skip">skip</string>
 </resources>

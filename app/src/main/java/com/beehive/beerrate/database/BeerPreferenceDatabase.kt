@@ -5,7 +5,6 @@ import androidx.room.RoomDatabase
 import com.beehive.beerrate.model.Beer
 import com.beehive.beerrate.model.BeerStyle
 import com.beehive.beerrate.model.BeerType
-import dagger.Provides
 
 @Database(entities = [BeerType::class, BeerStyle::class, Beer::class], version = 1)
 abstract class BeerPreferenceDatabase : RoomDatabase() {
