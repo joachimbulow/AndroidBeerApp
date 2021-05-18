@@ -76,7 +76,7 @@ class PreferenceFragment : Fragment() {
                     editBeerStyleButton.isEnabled = false
                     editBeerTypesButton.text = getString(R.string.save)
                     beerTypesRecyclerView.adapter =
-                        BeerTypeEditAdapter(preferenceViewModel.allBeerTypes.value!!, context!!)
+                        BeerTypeEditAdapter(preferenceViewModel.allBeerTypes.value!!)
 
                 }
             }
@@ -97,7 +97,7 @@ class PreferenceFragment : Fragment() {
                     editBeerTypesButton.isEnabled = false
                     editBeerStyleButton.text = getString(R.string.save)
                     beerStylesRecyclerView.adapter =
-                        BeerStyleEditAdapter(preferenceViewModel.allBeerStyles.value!!, context!!)
+                        BeerStyleEditAdapter(preferenceViewModel.allBeerStyles.value!!)
                     beerStylesRecyclerView.removeItemDecorationAt(0)
                 }
             }

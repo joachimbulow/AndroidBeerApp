@@ -1,6 +1,5 @@
 package com.beehive.beerrate.ui.preference
 
-import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +10,7 @@ import com.beehive.beerrate.R
 import com.beehive.beerrate.helper.ResolveAttrColor
 import com.beehive.beerrate.model.BeerType
 
-class BeerTypeEditAdapter(var allBeerTypes: List<BeerType>,  val context: Context) :
+class BeerTypeEditAdapter(var allBeerTypes: List<BeerType>) :
     RecyclerView.Adapter<BeerTypeEditAdapter.EditBeerTypeViewHolder>() {
 
     inner class EditBeerTypeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -21,12 +20,12 @@ class BeerTypeEditAdapter(var allBeerTypes: List<BeerType>,  val context: Contex
         fun bind(beerType: BeerType) {
             beerTypeTextView.text = beerType.type
             originalTextViewColor = beerTypeTextView.currentTextColor
-            beerTypeTextView.setBackgroundColor(if(beerType.preferred) ResolveAttrColor.resolve(context,R.attr.colorPrimary) else 0)
+            beerTypeTextView.setBackgroundColor(if(beerType.preferred) ResolveAttrColor.resolve(beerTypeTextView.context,R.attr.colorPrimary) else 0)
             beerTypeTextView.setTextColor(if (beerType.preferred) Color.WHITE else originalTextViewColor)
 
             beerTypeTextView.setOnClickListener {
                 beerType.preferred = !beerType.preferred
-                beerTypeTextView.setBackgroundColor(if(beerType.preferred) ResolveAttrColor.resolve(context,R.attr.colorPrimary) else 0)
+                beerTypeTextView.setBackgroundColor(if(beerType.preferred) ResolveAttrColor.resolve(beerTypeTextView.context,R.attr.colorPrimary) else 0)
                 beerTypeTextView.setTextColor(if (beerType.preferred) Color.WHITE else originalTextViewColor)
             }
         }

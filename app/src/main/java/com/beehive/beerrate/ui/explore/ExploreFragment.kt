@@ -1,16 +1,17 @@
 package com.beehive.beerrate.ui.explore
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
-import android.widget.Adapter
-import android.widget.Button
-import android.widget.Toast
+import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +19,8 @@ import com.beehive.beerrate.R
 import com.beehive.beerrate.helper.observeOnce
 import com.beehive.beerrate.model.Beer
 import com.beehive.beerrate.ui.preference.PreferenceViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.yuyakaido.android.cardstackview.*
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,6 +51,7 @@ class ExploreFragment : Fragment(), CardStackListener {
         skipButton = root.findViewById(R.id.explore_skip_button)
 
         initialize()
+
         return root
     }
 
@@ -70,6 +74,31 @@ class ExploreFragment : Fragment(), CardStackListener {
             cardStackView.swipe()
         }
 
+        view.setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
+                showBottomSheetBeerDialog()
+            }
+            true
+        }
+    }
+
+
+
+    private fun showBottomSheetBeerDialog() {
+        val dialog = BottomSheetDialog(requireContext(),R.style.AppBottomSheetDialogTheme)
+        dialog.setContentView(R.layout.bottom_sheet_beer_dialog)
+
+        val beer = adapter.getItem(manager.topPosition)
+        val nameTextView: TextView? = dialog.findViewById(R.id.bottom_sheet_name_textview)
+        val locationAndManfTextView: TextView? = dialog.findViewById(R.id.bottom_sheet_location_and_manf_textview)
+        val descriptionTextView: TextView? =
+            dialog.findViewById(R.id.bottom_sheet_description_textview)
+
+        nameTextView!!.text = beer.beerName.trim()
+        locationAndManfTextView!!.text = "Made by ${beer.brewerName} from ${beer.city}, ${beer.name}".trim()
+        descriptionTextView!!.text = beer.description
+
+        dialog.show()
     }
 
     override fun onCardDisappeared(view: View?, position: Int) {

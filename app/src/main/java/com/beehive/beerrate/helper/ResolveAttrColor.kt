@@ -10,7 +10,7 @@ class ResolveAttrColor {
     companion object {
         fun resolve(context: Context, @AttrRes attr: Int): Int {
             val typedValue = TypedValue()
-            context.theme.resolveAttribute(R.attr.colorPrimary, typedValue, true)
+            context.theme.resolveAttribute(attr, typedValue, true)
             return typedValue.data
         }
     }

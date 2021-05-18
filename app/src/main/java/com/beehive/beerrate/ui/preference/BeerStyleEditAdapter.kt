@@ -11,7 +11,7 @@ import com.beehive.beerrate.R
 import com.beehive.beerrate.helper.ResolveAttrColor
 import com.beehive.beerrate.model.BeerStyle
 
-class BeerStyleEditAdapter(var allBeerStyles: List<BeerStyle>, val context: Context) :
+class BeerStyleEditAdapter(var allBeerStyles: List<BeerStyle>) :
     RecyclerView.Adapter<BeerStyleEditAdapter.EditBeerStyleViewHolder>() {
     inner class EditBeerStyleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val beerStyleEditTextView: TextView =
@@ -21,11 +21,11 @@ class BeerStyleEditAdapter(var allBeerStyles: List<BeerStyle>, val context: Cont
         fun bind(beerStyle: BeerStyle) {
             beerStyleEditTextView.text = beerStyle.name
             originalTextViewColor = beerStyleEditTextView.currentTextColor
-            beerStyleEditTextView.setBackgroundColor(if (beerStyle.preferred) ResolveAttrColor.resolve(context,R.attr.colorPrimary) else 0)
+            beerStyleEditTextView.setBackgroundColor(if (beerStyle.preferred) ResolveAttrColor.resolve(beerStyleEditTextView.context,R.attr.colorPrimary) else 0)
             beerStyleEditTextView.setTextColor(if (beerStyle.preferred) Color.WHITE else originalTextViewColor)
             beerStyleEditTextView.setOnClickListener {
                 beerStyle.preferred = !beerStyle.preferred
-                beerStyleEditTextView.setBackgroundColor(if (beerStyle.preferred) ResolveAttrColor.resolve(context,R.attr.colorPrimary) else 0)
+                beerStyleEditTextView.setBackgroundColor(if (beerStyle.preferred) ResolveAttrColor.resolve(beerStyleEditTextView.context,R.attr.colorPrimary) else 0)
                 beerStyleEditTextView.setTextColor(if (beerStyle.preferred) Color.WHITE else originalTextViewColor)
             }
         }
