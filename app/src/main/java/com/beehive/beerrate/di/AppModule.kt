@@ -2,6 +2,7 @@ package com.beehive.beerrate.di
 
 import android.content.Context
 import androidx.room.Room
+import com.beehive.beerrate.database.BeerDao
 import com.beehive.beerrate.database.BeerPreferenceDatabase
 import com.beehive.beerrate.database.BeerStyleDao
 import com.beehive.beerrate.database.BeerTypeDao
@@ -23,7 +24,6 @@ object AppModule {
     fun provideBeerPreferenceDatabase(@ApplicationContext app: Context) =
         Room.databaseBuilder(app, BeerPreferenceDatabase::class.java, "beerdb")
             .createFromAsset("database/beerdb.db")
-            .allowMainThreadQueries()
             .build()
 
     @Singleton
@@ -36,6 +36,12 @@ object AppModule {
     @Provides
     fun provideBeerStyleDao(db: BeerPreferenceDatabase): BeerStyleDao {
         return db.beerStyleDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideBeerDao(db: BeerPreferenceDatabase): BeerDao {
+        return db.beerDao()
     }
 
     @Singleton

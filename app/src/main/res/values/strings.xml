@@ -1,11 +1,14 @@
 <resources>
     <string name="app_name">BeerRate</string>
     <string name="title_preferences">Preferences</string>
+    <string name="title_explore">Explore</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="save">Save</string>
     <string name="types_of_beer">Types of beer</string>
     <string name="edit">Edit</string>
     <string name="styles_of_beer">Styles of beer</string>
+    <string name="save">Save</string>
+    <string name="pref">pref</string>
+    <string name="skip">skip</string>
     <string name="search">Search</string>
 </resources>

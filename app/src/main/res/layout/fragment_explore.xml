@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.explore.ExploreFragment">
+
+    <com.yuyakaido.android.cardstackview.CardStackView
+        android:id="@+id/card_stack_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:padding="4dp"
+        app:layout_constraintBottom_toTopOf="@id/button_row"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </com.yuyakaido.android.cardstackview.CardStackView>
+
+    <LinearLayout
+        android:id="@+id/button_row"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:divider="@drawable/divider"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:showDividers="middle"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_stack_view">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/explore_skip_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabSize="auto"
+            android:clickable="true"
+            android:contentDescription="@string/skip"
+            android:elevation="1dp"
+            android:src="@drawable/skip_red"
+            app:elevation="1dp"
+            app:borderWidth="0dp"
+            app:rippleColor="#FF0000"
+            app:tint="#FF0000" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/explore_pref_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:contentDescription="@string/pref"
+            android:elevation="1dp"
+            app:borderWidth="0dp"
+            android:src="@drawable/like_green"
+            app:elevation="1dp"
+            app:rippleColor="#6FE2B3"
+            app:tint="#6FE2B3" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_weight="1"
+        android:src="@android:drawable/arrow_up_float"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_row"
+        app:tint="#27000000" />
+</androidx.constraintlayout.widget.ConstraintLayout>

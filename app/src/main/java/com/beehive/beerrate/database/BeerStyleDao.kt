@@ -16,6 +16,15 @@ interface BeerStyleDao {
     @Query("SELECT * FROM beerstyles")
     fun getAll(): Flow<List<BeerStyle>>
 
+    @Query("SELECT * FROM beerstyles WHERE beertype_id IN (SELECT beertype_id FROM beertypes WHERE preferred = 1)")
+    fun getAllBasedOnPreferredBeerTypes(): Flow<List<BeerStyle>>
+
+    @Query("SELECT * FROM beerstyles WHERE preferred = 1")
+    fun getAllPreferred(): Flow<List<BeerStyle>>
+
+    @Query("UPDATE beerstyles SET preferred = :preferred WHERE beerstyle_id = :id")
+    fun updatePreferred(id: Int, preferred: Boolean)
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun save(beerStyle: BeerStyle)
 
