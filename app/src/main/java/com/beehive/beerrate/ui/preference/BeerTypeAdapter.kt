@@ -15,7 +15,7 @@ class BeerTypeAdapter(var beerTypes: List<BeerType>) :
         private val beerTypeTextView: TextView = itemView.findViewById(R.id.beer_type_textView)
 
         fun bind(beerType: BeerType) {
-            beerTypeTextView.text = beerType.type
+            beerTypeTextView.text = itemView.resources.getString(R.string.beer_type, "", beerType.type)
         }
     }
 
