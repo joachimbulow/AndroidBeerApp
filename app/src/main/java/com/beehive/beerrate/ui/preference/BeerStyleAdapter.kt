@@ -1,8 +1,8 @@
 package com.beehive.beerrate.ui.preference
 
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.LinearLayout
+import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.beehive.beerrate.R
@@ -13,9 +13,23 @@ class BeerStyleAdapter(var beerStyles: List<BeerStyle>) :
 
     inner class BeerStyleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val beerStyleTextView: TextView = itemView.findViewById(R.id.beer_style_textView)
+        private val beerStyleDescriptionTextView: TextView =
+            itemView.findViewById(R.id.beer_style_description)
+
 
         fun bind(beerStyle: BeerStyle) {
             beerStyleTextView.text = beerStyle.name
+            beerStyleDescriptionTextView.text = beerStyle.description
+            var expanded = false
+            beerStyleDescriptionTextView.setOnClickListener {
+                if(expanded) {
+                    beerStyleDescriptionTextView.maxLines = 3
+                    expanded = false
+                } else {
+                    beerStyleDescriptionTextView.maxLines = Integer.MAX_VALUE
+                    expanded = true
+                }
+            }
         }
     }
 

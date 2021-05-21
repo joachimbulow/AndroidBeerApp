@@ -1,27 +1,45 @@
 package com.beehive.beerrate.repository
 
-import android.util.Log
 import com.beehive.beerrate.database.BeerStyleDao
 import com.beehive.beerrate.database.BeerTypeDao
 import com.beehive.beerrate.model.BeerStyle
 import com.beehive.beerrate.model.BeerType
-import com.beehive.beerrate.service.BeerService
-import com.beehive.beerrate.service.BeerServiceGenerator
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class BeerPreferenceRepository @Inject constructor(
-     val beerTypeDao: BeerTypeDao,
-     val beerStyleDao: BeerStyleDao
+    private val beerTypeDao: BeerTypeDao,
+    private val beerStyleDao: BeerStyleDao
 ) {
-    fun getBeerTypePreferences(): Flow<List<BeerType>> {
+
+    fun getBeerTypes(): Flow<List<BeerType>> {
         return beerTypeDao.getAll()
     }
 
+    fun getBeerTypePreferences(): Flow<List<BeerType>> {
+        return beerTypeDao.getAllPreferred()
+    }
+
+    fun updatePreferredBeerType(beerType: BeerType) {
+        beerTypeDao.updatePreferred(beerType.uid, beerType.preferred)
+    }
+
+    fun getBeerStyles(): Flow<List<BeerStyle>> {
+        return beerStyleDao.getAll()
+    }
+
+    fun getAllBasedOnPreferredBeerTypes(): Flow<List<BeerStyle>> {
+        return beerStyleDao.getAllBasedOnPreferredBeerTypes()
+    }
+
     fun getBeerStylePreferences(): Flow<List<BeerStyle>> {
-        return  beerStyleDao.getAll()
+        return beerStyleDao.getAllPreferred()
+    }
+
+    fun updatePreferredBeerStyle(beerStyle: BeerStyle) {
+        beerStyleDao.updatePreferred(beerStyle.uid, beerStyle.preferred)
     }
 
 }
