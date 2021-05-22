@@ -17,4 +17,7 @@ interface BeerDao {
     
     @Update
     fun updateBeer(beer: Beer)
+
+    @Query("SELECT * FROM beers WHERE calories = 255")
+    fun searchBeer(): Flow<List<Beer>>
 }
