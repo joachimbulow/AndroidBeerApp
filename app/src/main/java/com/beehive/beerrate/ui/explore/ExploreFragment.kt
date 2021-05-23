@@ -77,6 +77,7 @@ class ExploreFragment : Fragment(), CardStackListener {
 
 
     private fun showBottomSheetBeerDialog() {
+        if(adapter.itemCount <= manager.topPosition ) return
         val dialog = BottomSheetDialog(requireContext(), R.style.AppBottomSheetDialogTheme)
         dialog.setContentView(R.layout.bottom_sheet_beer_dialog)
 
@@ -108,10 +109,11 @@ class ExploreFragment : Fragment(), CardStackListener {
     }
 
     fun updateTopBeer(offset: Int) {
+        if(adapter.itemCount <= manager.topPosition ) return
         val beer = adapter.getItem(manager.topPosition + offset)
         beer.preferred = true
         viewModel.updateBeer(listOf(beer))
-        Log.d("PREF BEER", beer.toString())
+
     }
 
     override fun onCardCanceled() {

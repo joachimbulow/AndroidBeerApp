@@ -12,9 +12,12 @@ interface BeerDao {
     @Query("SELECT * FROM beers WHERE preferred = 0")
     fun getAllNonPreferredBeers(): Flow<List<Beer>>
 
-    @Query("SELECT * FROM beers WHERE beerstyle_id IN (SELECT beerstyle_id FROM beerstyles WHERE preferred = 1) AND preferred = 0 ORDER BY RANDOM()")
+    @Query("SELECT * FROM beers WHERE beerstyle_id IN (SELECT beerstyle_id FROM beerstyles WHERE preferred = 1) AND preferred = 0 ORDER BY RANDOM() LIMIT 100")
     fun getAllNonPreferredBeersRandomOrder(): Flow<List<Beer>>
-    
+
+    @Query("SELECT * FROM beers WHERE preferred = 1")
+    fun getPreferredBeers(): Flow<List<Beer>>
+
     @Update
     fun updateBeer(beer: Beer)
 }
