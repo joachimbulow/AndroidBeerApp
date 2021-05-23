@@ -18,18 +18,20 @@ class MyBeersFragment : Fragment() {
 
     private lateinit var myBeersViewModel: MyBeersViewModel
     private lateinit var prefBeerRecycleView: RecyclerView
-    private lateinit var searchView: SearchView
+    private lateinit var adapter: PrefBeerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
         myBeersViewModel =
             ViewModelProvider(this).get(MyBeersViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_my_beers, container, false)
         prefBeerRecycleView = root.findViewById(R.id.pref_beer_recyclerView)
-        prefBeerRecycleView.adapter = PrefBeerAdapter(emptyList())
+        adapter = PrefBeerAdapter(mutableListOf())
+        prefBeerRecycleView.adapter = adapter
         prefBeerRecycleView.layoutManager = LinearLayoutManager(activity)
         prefBeerRecycleView.addItemDecoration(
             DividerItemDecoration(
@@ -39,7 +41,6 @@ class MyBeersFragment : Fragment() {
         )
 
         // Makes sure the onCreateOptionsMenu is invoked.
-        setHasOptionsMenu(true)
         return root
     }
 
@@ -47,27 +48,29 @@ class MyBeersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         myBeersViewModel.prefBeers.observeOnce(viewLifecycleOwner, Observer { t ->
-            val adapter = PrefBeerAdapter(t)
-
-            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    return false
-                }
-
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    adapter.filter.filter(newText)
-                    return true
-                }
-
-            })
-            prefBeerRecycleView.adapter = adapter
+            adapter.beers = t
+            adapter.notifyDataSetChanged()
+            adapter.filter.filter("")
         })
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.my_beer_menu, menu)
-        searchView = menu.findItem(R.id.action_search).actionView as SearchView
+        val searchView = menu.findItem(R.id.action_search).actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter.filter(newText)
+                return true
+            }
+
+        })
     }
 
 }
