@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.beehive.beerrate.R
@@ -35,6 +36,8 @@ class NotificationsFragment : Fragment() {
         searchedBeersRecyclerView = root.findViewById(R.id.searchBeerRecyclerView)
         searchedBeersRecyclerView.adapter = BeerAdapter(emptyList());
         searchedBeersRecyclerView.layoutManager = LinearLayoutManager(activity)
+
+        val decoration: DividerItemDecoration = DividerItemDecoration(searchedBeersRecyclerView.context, LinearLayoutManager.VERTICAL)
 
         //Init search button
         var searchEditText: EditText = root.findViewById(R.id.searchEditText)

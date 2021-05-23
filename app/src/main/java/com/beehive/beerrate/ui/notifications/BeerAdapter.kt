@@ -14,9 +14,13 @@ class BeerAdapter(var beers: List<Beer>) : RecyclerView.Adapter<BeerAdapter.Beer
 
     inner class BeerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val beerViewText: TextView = itemView.findViewById(R.id.beerText)
+        private val brewerNameText: TextView = itemView.findViewById(R.id.brewerNameText)
+        private val countryCodeText: TextView = itemView.findViewById(R.id.countryCodeText)
 
         fun bind(beer: Beer) {
             beerViewText.text = beer.beerName
+            brewerNameText.text = beer.brewerName
+            countryCodeText.text = beer.code
         }
     }
 
