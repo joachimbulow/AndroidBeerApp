@@ -10,4 +10,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="almost_white">#CCFFFFFF</color>
     <color name="darkgrey">#33FFFFFF</color>
+    <color name="beer_green">#2E7D32</color>
+    <color name="beer_green_variant">#1B5E20</color>
 </resources>
