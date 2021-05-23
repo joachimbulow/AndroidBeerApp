@@ -25,8 +25,8 @@ class ExploreRepository @Inject constructor(
         return beerDao.updateBeer(beer)
     }
 
-    fun searchBeer(): Flow<List<Beer>> {
-        return beerDao.getAllNonPreferredBeersRandomOrder()
+    fun searchBeer(searchString: String): Flow<List<Beer>> {
+        return beerDao.searchBeer(searchString)
     }
 
 }

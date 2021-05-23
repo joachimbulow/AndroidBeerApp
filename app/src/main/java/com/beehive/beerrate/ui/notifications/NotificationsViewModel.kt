@@ -1,9 +1,7 @@
 package com.beehive.beerrate.ui.notifications
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
+import androidx.lifecycle.*
+import com.beehive.beerrate.model.Beer
 import com.beehive.beerrate.repository.BeerPreferenceRepository
 import com.beehive.beerrate.repository.ExploreRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,7 +10,20 @@ import javax.inject.Inject
 @HiltViewModel
 class NotificationsViewModel @Inject constructor(private val exploreRepository: ExploreRepository) : ViewModel() {
 
-    val searchResults = exploreRepository.searchBeer().asLiveData()
+    //Search logic
+
+    val mutableSearchString: MutableLiveData<String> = MutableLiveData()
+
+    fun searchForBeer(query: String) {
+        mutableSearchString.value = query;
+    }
+
+    val beerObservable: LiveData<List<Beer>> = Transformations.switchMap(mutableSearchString) { query ->
+        exploreRepository.searchBeer(query).asLiveData()
+    }
+
+    // // // //
+
 
     private val _text = MutableLiveData<String>().apply {
         value = "Search for beers"

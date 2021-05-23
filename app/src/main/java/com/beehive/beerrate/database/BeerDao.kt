@@ -18,6 +18,6 @@ interface BeerDao {
     @Update
     fun updateBeer(beer: Beer)
 
-    @Query("SELECT * FROM beers WHERE calories = 255")
-    fun searchBeer(): Flow<List<Beer>>
+    @Query("SELECT * FROM beers WHERE beer_name LIKE '%' || :searchString || '%' OR brewer_name LIKE '%' || :searchString || '%' OR city LIKE '%' || :searchString || '%'")
+    fun searchBeer(searchString: String): Flow<List<Beer>>
 }

@@ -27,7 +27,6 @@ class BeerAdapter(var beers: List<Beer>) : RecyclerView.Adapter<BeerAdapter.Beer
     }
 
     override fun onBindViewHolder(holder: BeerViewHolder, position: Int) {
-        println("onBind")
         return holder.bind(beers[position])
     }
 

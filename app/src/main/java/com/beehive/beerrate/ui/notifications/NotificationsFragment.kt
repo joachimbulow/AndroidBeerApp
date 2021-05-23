@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -34,6 +36,14 @@ class NotificationsFragment : Fragment() {
         searchedBeersRecyclerView.adapter = BeerAdapter(emptyList());
         searchedBeersRecyclerView.layoutManager = LinearLayoutManager(activity)
 
+        //Init search button
+        var searchEditText: EditText = root.findViewById(R.id.searchEditText)
+        var button: Button = root.findViewById(R.id.searchBtn)
+        button.setOnClickListener({
+            println("Searching for: " + searchEditText.text.toString())
+            notificationsViewModel.searchForBeer(searchEditText.text.toString())
+        })
+
         //Rest
         notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
@@ -44,9 +54,11 @@ class NotificationsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        notificationsViewModel.searchResults.observe(viewLifecycleOwner, {
-        searchedBeersRecyclerView.adapter = BeerAdapter(notificationsViewModel.searchResults.value!!)
-            println("hey")
+        notificationsViewModel.beerObservable.observe(viewLifecycleOwner, {
+        searchedBeersRecyclerView.adapter = BeerAdapter(notificationsViewModel.beerObservable.value!!)
     })
+
+
     }
+
 }
