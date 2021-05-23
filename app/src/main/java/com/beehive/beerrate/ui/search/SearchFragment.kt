@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -41,10 +42,17 @@ class SearchFragment : Fragment() {
         //Init search button
         var searchEditText: EditText = root.findViewById(R.id.searchEditText)
         var button: Button = root.findViewById(R.id.searchBtn)
-        button.setOnClickListener({
-            println("Searching for: " + searchEditText.text.toString())
-            searchViewModel.searchForBeer(searchEditText.text.toString())
-        })
+        button.setOnClickListener {
+            if (searchEditText.text.length < 3) {
+                Toast.makeText(
+                    requireActivity().applicationContext,
+                    "Please input at least 3 characters",
+                    Toast.LENGTH_SHORT
+                ).show();
+            } else {
+                searchViewModel.searchForBeer(searchEditText.text.toString())
+            }
+        }
 
         //Rest
         searchViewModel.text.observe(viewLifecycleOwner, Observer {

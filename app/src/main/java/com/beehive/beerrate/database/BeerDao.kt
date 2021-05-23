@@ -20,4 +20,6 @@ interface BeerDao {
 
     @Query("SELECT * FROM beers WHERE beer_name LIKE '%' || :searchString || '%' OR brewer_name LIKE '%' || :searchString || '%' OR city LIKE '%' || :searchString || '%'")
     fun searchBeer(searchString: String): Flow<List<Beer>>
+
+
 }

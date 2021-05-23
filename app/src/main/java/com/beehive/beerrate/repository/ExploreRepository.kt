@@ -28,5 +28,4 @@ class ExploreRepository @Inject constructor(
     fun searchBeer(searchString: String): Flow<List<Beer>> {
         return beerDao.searchBeer(searchString)
     }
-
 }
