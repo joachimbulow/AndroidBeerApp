@@ -50,8 +50,6 @@ Of the above BeerRate uses:
   <img src="Screenshots/Preferences.png" width="276"/>
   <img src="Screenshots/Explore.png" width="276"/>
   <img src="Screenshots/MyBeers.png" width="276"/>
-</p>  
-<p float="left">
   <img src="Screenshots/PreferencesEdit.png" width="276"/>
   <img src="Screenshots/ExploreInfo.png" width="276"/>
   <img src="Screenshots/MyBeersSearch.png" width="276"/>
