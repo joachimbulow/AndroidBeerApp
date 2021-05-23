@@ -70,7 +70,7 @@ class PreferenceFragment : Fragment() {
                 BeerStyleAdapter(preferenceViewModel.preferredBeerStyles.value!!)
         })
 
-        preferenceViewModel.allBeerTypes.observe(viewLifecycleOwner, {
+        preferenceViewModel.allBeerTypes.observe(viewLifecycleOwner, Observer {
             editBeerTypesButton.setOnClickListener {
                 if (beerTypesEditMode) {
                     preferenceViewModel.updateBeerTypePreferences()
@@ -97,7 +97,7 @@ class PreferenceFragment : Fragment() {
             }
         })
 
-        preferenceViewModel.allBeerStyles.observe(viewLifecycleOwner, {
+        preferenceViewModel.allBeerStyles.observe(viewLifecycleOwner, Observer {
             editBeerStyleButton.setOnClickListener {
                 if (beerStylesEditMode) {
                     preferenceViewModel.updateBeerStylePreferences()
