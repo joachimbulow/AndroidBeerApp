@@ -1,14 +1,13 @@
-package com.beehive.beerrate.ui.notifications
+package com.beehive.beerrate.ui.search
 
 import androidx.lifecycle.*
 import com.beehive.beerrate.model.Beer
-import com.beehive.beerrate.repository.BeerPreferenceRepository
 import com.beehive.beerrate.repository.ExploreRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class NotificationsViewModel @Inject constructor(private val exploreRepository: ExploreRepository) : ViewModel() {
+class SearchViewModel @Inject constructor(private val exploreRepository: ExploreRepository) : ViewModel() {
 
     //Search logic
 

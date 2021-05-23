@@ -1,4 +1,4 @@
-package com.beehive.beerrate.ui.notifications
+package com.beehive.beerrate.ui.search
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,8 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.beehive.beerrate.R
 import com.beehive.beerrate.model.Beer
-import com.beehive.beerrate.model.BeerType
-import com.beehive.beerrate.ui.preference.BeerTypeAdapter
 
 class BeerAdapter(var beers: List<Beer>) : RecyclerView.Adapter<BeerAdapter.BeerViewHolder>() {
 
