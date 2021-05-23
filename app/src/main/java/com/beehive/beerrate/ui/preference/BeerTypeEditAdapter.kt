@@ -20,14 +20,17 @@ class BeerTypeEditAdapter(var allBeerTypes: List<BeerType>) :
         fun bind(beerType: BeerType) {
             beerTypeTextView.text = beerType.type
             originalTextViewColor = beerTypeTextView.currentTextColor
-            beerTypeTextView.setBackgroundColor(if(beerType.preferred) ResolveAttrColor.resolve(beerTypeTextView.context,R.attr.colorPrimary) else 0)
-            beerTypeTextView.setTextColor(if (beerType.preferred) Color.WHITE else originalTextViewColor)
+            setEntryStyle(beerType)
 
             beerTypeTextView.setOnClickListener {
                 beerType.preferred = !beerType.preferred
-                beerTypeTextView.setBackgroundColor(if(beerType.preferred) ResolveAttrColor.resolve(beerTypeTextView.context,R.attr.colorPrimary) else 0)
-                beerTypeTextView.setTextColor(if (beerType.preferred) Color.WHITE else originalTextViewColor)
+                setEntryStyle(beerType)
             }
+        }
+
+        private fun setEntryStyle(beerType: BeerType) {
+            beerTypeTextView.setTextColor(if (beerType.preferred) Color.parseColor("#2e7d32") else Color.RED)
+            beerTypeTextView.text = itemView.resources.getString(R.string.beer_type, if (beerType.preferred) "✔   " else "✖   ", beerType.type)
         }
     }
 
