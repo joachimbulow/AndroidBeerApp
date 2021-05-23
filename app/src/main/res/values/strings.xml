@@ -12,4 +12,5 @@
     <string name="pref">pref</string>
     <string name="skip">skip</string>
     <string name="beer_type">%1$s%2$s</string>
+    <string name="beer_style">%1$s%2$s</string>
 </resources>
