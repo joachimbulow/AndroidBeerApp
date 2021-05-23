@@ -69,14 +69,12 @@ class PrefBeerAdapter(var beers: List<Beer>) :
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val tempList = mutableListOf<Beer>()
-                val search = constraint.toString().trim()
-                Log.d("SEARCH", search)
+                val search = constraint.toString().toLowerCase().trim()
                 if (search.isEmpty()) {
                     tempList.addAll(beers as MutableList<Beer>)
                 } else {
                     for (beer in beers) {
                         if (beer.beerName.toLowerCase().contains(search)) {
-                            Log.d("ADDED BEER",beer.beerName)
                             tempList.add(beer)
                         }
                     }
