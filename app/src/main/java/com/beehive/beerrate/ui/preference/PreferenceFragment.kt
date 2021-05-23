@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -58,17 +59,17 @@ class PreferenceFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        preferenceViewModel.preferredBeerTypes.observe(viewLifecycleOwner, {
+        preferenceViewModel.preferredBeerTypes.observe(viewLifecycleOwner, Observer {
             beerTypesRecyclerView.adapter =
                 BeerTypeAdapter(preferenceViewModel.preferredBeerTypes.value!!)
         })
 
-        preferenceViewModel.preferredBeerStyles.observe(viewLifecycleOwner, {
+        preferenceViewModel.preferredBeerStyles.observe(viewLifecycleOwner, Observer {
             beerStylesRecyclerView.adapter =
                 BeerStyleAdapter(preferenceViewModel.preferredBeerStyles.value!!)
         })
 
-        preferenceViewModel.allBeerTypes.observe(viewLifecycleOwner, {
+        preferenceViewModel.allBeerTypes.observe(viewLifecycleOwner, Observer {
             editBeerTypesButton.setOnClickListener {
                 if (beerTypesEditMode) {
                     preferenceViewModel.updateBeerTypePreferences()
@@ -88,13 +89,14 @@ class PreferenceFragment : Fragment() {
                 toggleBeerStyleButton.isEnabled = !beerTypesEditMode
             }
             toggleBeerStyleButton.setOnClickListener {
-                val visibility = if (beerTypesRecyclerView.visibility == View.GONE) View.VISIBLE else View.GONE
+                val visibility =
+                    if (beerTypesRecyclerView.visibility == View.GONE) View.VISIBLE else View.GONE
                 beerTypesRecyclerView.visibility = visibility
                 editBeerTypesButton.isEnabled = visibility == View.VISIBLE
             }
         })
 
-        preferenceViewModel.allBeerStyles.observe(viewLifecycleOwner, {
+        preferenceViewModel.allBeerStyles.observe(viewLifecycleOwner, Observer {
             editBeerStyleButton.setOnClickListener {
                 if (beerStylesEditMode) {
                     preferenceViewModel.updateBeerStylePreferences()

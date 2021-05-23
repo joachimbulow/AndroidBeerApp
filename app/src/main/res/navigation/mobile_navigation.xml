@@ -18,14 +18,14 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.beehive.beerrate.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_my_beers"
+        android:name="com.beehive.beerrate.ui.my_beers.MyBeersFragment"
+        android:label="@string/title_my_beers"
+        tools:layout="@layout/fragment_my_beers" />
 
     <fragment
         android:id="@+id/navigation_explore"
         android:name="com.beehive.beerrate.ui.explore.ExploreFragment"
         android:label="@string/title_explore"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_my_beers" />
 </navigation>
