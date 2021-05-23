@@ -47,14 +47,12 @@ Of the above BeerRate uses:
 ### Screenshots
 
 <p float="left">
-  <img src="Screenshots/Preferences.png" width="300"/>
-  <img src="Screenshots/Explore.png" width="300"/>
-  <img src="Screenshots/MyBeers.png" width="300"/>
-</p>  
-<p float="left">
-  <img src="Screenshots/PreferencesEdit.png" width="300"/>
-  <img src="Screenshots/ExploreInfo.png" width="300"/>
-  <img src="Screenshots/MyBeersSearch.png" width="300"/>
+  <img src="Screenshots/Preferences.png" width="276"/>
+  <img src="Screenshots/Explore.png" width="276"/>
+  <img src="Screenshots/MyBeers.png" width="276"/>
+  <img src="Screenshots/PreferencesEdit.png" width="276"/>
+  <img src="Screenshots/ExploreInfo.png" width="276"/>
+  <img src="Screenshots/MyBeersSearch.png" width="276"/>
 </p>
 
 ### Get Started
