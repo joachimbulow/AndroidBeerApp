@@ -59,4 +59,12 @@ class BeerServiceUnitTest {
                 createService.getBeerTypeByObjectId(manyResponse.embedded.beerTypes[0].objectId)
             println(singleResponse)
         }*/
+
+    @Test
+    fun fetchManyBeersWithBeerServiceAndThenFetchOneBeerByObjectIdSynchronously() = runBlocking() {
+        val createService = BeerServiceGenerator.createService(BeerService::class.java)
+        val manyResponse = createService.getBeerReviewByBeerId(156)
+        assert(manyResponse.embedded.beerReviews.count() > 0)
+        println(manyResponse.embedded.beerReviews[0])
+    }
 }

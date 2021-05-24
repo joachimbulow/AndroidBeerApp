@@ -49,5 +49,4 @@ object AppModule {
     fun provideBeerService(): BeerService {
         return BeerServiceGenerator.createService(BeerService::class.java)
     }
-
 }

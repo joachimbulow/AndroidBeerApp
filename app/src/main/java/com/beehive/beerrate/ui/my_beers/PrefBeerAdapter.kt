@@ -7,13 +7,16 @@ import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.beehive.beerrate.R
 import com.beehive.beerrate.model.Beer
+import com.beehive.beerrate.ui.beerbottomsheet.BeerBottomSheetFragment
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class PrefBeerAdapter(var beers: List<Beer>) :
+class PrefBeerAdapter(var beers: List<Beer>, val fragmentManager: FragmentManager) :
     RecyclerView.Adapter<PrefBeerAdapter.BeerPrefViewHolder>(), Filterable {
     private var filteredBeers: MutableList<Beer> = mutableListOf(*beers.toTypedArray())
 
@@ -31,21 +34,7 @@ class PrefBeerAdapter(var beers: List<Beer>) :
             Glide.with(image).load(beer.imageUrl).into(image)
 
             itemView.setOnClickListener {
-                val dialog = BottomSheetDialog(itemView.context, R.style.AppBottomSheetDialogTheme)
-                dialog.setContentView(R.layout.bottom_sheet_beer_dialog)
-
-                val nameTextView: TextView? = dialog.findViewById(R.id.bottom_sheet_name_textview)
-                val locationAndManfTextView: TextView? =
-                    dialog.findViewById(R.id.bottom_sheet_location_and_manf_textview)
-                val descriptionTextView: TextView? =
-                    dialog.findViewById(R.id.bottom_sheet_description_textview)
-
-                nameTextView!!.text = beer.beerName.trim()
-                locationAndManfTextView!!.text =
-                    "Made by ${beer.brewerName} from ${beer.city}, ${beer.name}".trim()
-                descriptionTextView!!.text = beer.description
-
-                dialog.show()
+                BeerBottomSheetFragment(beer).show(fragmentManager, "MyBeerBottomSheet")
             }
         }
     }

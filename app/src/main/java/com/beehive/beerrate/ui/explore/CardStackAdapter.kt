@@ -15,9 +15,9 @@ class CardStackAdapter(
 ) : RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var image: ImageView = view.findViewById(R.id.item_image)
-        val beerName: TextView = view.findViewById(R.id.beer_name)
-        val location: TextView = view.findViewById(R.id.beer_location)
+        private var image: ImageView = view.findViewById(R.id.item_image)
+        private val beerName: TextView = view.findViewById(R.id.beer_name)
+        private val location: TextView = view.findViewById(R.id.beer_location)
 
         fun bind(beer: Beer) {
             Glide.with(image).load(beer.imageUrl).into(image)

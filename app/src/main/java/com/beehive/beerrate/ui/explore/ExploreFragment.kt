@@ -1,19 +1,17 @@
 package com.beehive.beerrate.ui.explore
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.beehive.beerrate.R
 import com.beehive.beerrate.helper.observeOnce
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.beehive.beerrate.ui.beerbottomsheet.BeerBottomSheetFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.yuyakaido.android.cardstackview.*
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,12 +51,13 @@ class ExploreFragment : Fragment(), CardStackListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.allNonPreferredBeers.observeOnce(viewLifecycleOwner, Observer {
-            adapter = CardStackAdapter(viewModel.allNonPreferredBeers.value!!)
+        viewModel.allNonPreferredBeers.observeOnce(viewLifecycleOwner, Observer {t ->
+            adapter = CardStackAdapter(t)
             cardStackView.adapter = adapter
 
             checkCount()
         })
+
 
         prefButton.setOnClickListener {
             cardStackView.swipe()
@@ -77,20 +76,7 @@ class ExploreFragment : Fragment(), CardStackListener {
 
     private fun showBottomSheetBeerDialog() {
         if(adapter.itemCount <= manager.topPosition ) return
-        val dialog = BottomSheetDialog(requireContext(), R.style.AppBottomSheetDialogTheme)
-        dialog.setContentView(R.layout.bottom_sheet_beer_dialog)
-
-        val beer = adapter.getItem(manager.topPosition)
-        val nameTextView: TextView? = dialog.findViewById(R.id.bottom_sheet_name_textview)
-        val locationAndManfTextView: TextView? = dialog.findViewById(R.id.bottom_sheet_location_and_manf_textview)
-        val descriptionTextView: TextView? =
-            dialog.findViewById(R.id.bottom_sheet_description_textview)
-
-        nameTextView!!.text = beer.beerName.trim()
-        locationAndManfTextView!!.text = "Made by ${beer.brewerName} from ${beer.city}, ${beer.name}".trim()
-        descriptionTextView!!.text = beer.description
-
-        dialog.show()
+        BeerBottomSheetFragment(adapter.getItem(manager.topPosition)).show(parentFragmentManager,"BOTTOM")
     }
 
     override fun onCardDisappeared(view: View?, position: Int) {

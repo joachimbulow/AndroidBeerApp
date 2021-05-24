@@ -4,6 +4,7 @@ import com.beehive.beerrate.model.*
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface BeerService {
 
@@ -25,9 +26,13 @@ interface BeerService {
     @GET("beerreviews/{objectId}")
     suspend fun getBeerReviewByObjectId(@Path("objectId") objectId: String): BeerReview
 
+    @GET("beerreviews/search/findByBeer_Uid")
+    suspend fun getBeerReviewByBeerId(@Query("beerId") id: Long): EmbeddedBeerReviewList
+
     @GET("beertypes")
     suspend fun getBeerTypes(): EmbeddedBeerTypeList
 
     @GET("beertypes/{objectId}")
     suspend fun getBeerTypeByObjectId(@Path("objectId") objectId: String): BeerType
+
 }

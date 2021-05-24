@@ -16,5 +16,6 @@
     <string name="skip">skip</string>
     <string name="search">Search</string>
     <string name="beer_type">%1$s%2$s</string>
+    <string name="user_rating">User rating</string>
     <string name="beer_style">%1$s%2$s</string>
 </resources>

@@ -25,12 +25,13 @@ class MyBeersFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // Makes sure the onCreateOptionsMenu is invoked.
         setHasOptionsMenu(true)
         myBeersViewModel =
             ViewModelProvider(this).get(MyBeersViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_my_beers, container, false)
         prefBeerRecycleView = root.findViewById(R.id.pref_beer_recyclerView)
-        adapter = PrefBeerAdapter(mutableListOf())
+        adapter = PrefBeerAdapter(mutableListOf(),parentFragmentManager)
         prefBeerRecycleView.adapter = adapter
         prefBeerRecycleView.layoutManager = LinearLayoutManager(activity)
         prefBeerRecycleView.addItemDecoration(
@@ -40,7 +41,6 @@ class MyBeersFragment : Fragment() {
             )
         )
 
-        // Makes sure the onCreateOptionsMenu is invoked.
         return root
     }
 
