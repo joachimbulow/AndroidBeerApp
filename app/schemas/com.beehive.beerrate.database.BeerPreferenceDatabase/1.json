@@ -1,0 +1,218 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "45057addddc48a25b0c0207f78806149",
+    "entities": [
+      {
+        "tableName": "beertypes",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`beertype_id` INTEGER NOT NULL, `preferred` INTEGER NOT NULL, `type` TEXT NOT NULL, PRIMARY KEY(`beertype_id`))",
+        "fields": [
+          {
+            "fieldPath": "uid",
+            "columnName": "beertype_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "preferred",
+            "columnName": "preferred",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "beertype_id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "beerstyles",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`beerstyle_id` INTEGER NOT NULL, `query_id` INTEGER NOT NULL, `beerstyle_name` TEXT NOT NULL, `description` TEXT NOT NULL, `beertype_id` INTEGER NOT NULL, `preferred` INTEGER NOT NULL, PRIMARY KEY(`beerstyle_id`))",
+        "fields": [
+          {
+            "fieldPath": "uid",
+            "columnName": "beerstyle_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "queryId",
+            "columnName": "query_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "beerstyle_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "beerTypeId",
+            "columnName": "beertype_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "preferred",
+            "columnName": "preferred",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "beerstyle_id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "beers",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`beer_id` INTEGER NOT NULL, `id` TEXT NOT NULL, `query_id` TEXT NOT NULL, `beer_name` TEXT NOT NULL, `image_url` TEXT NOT NULL, `description` TEXT, `style_score` REAL NOT NULL, `overall_score` REAL NOT NULL, `average_quick_rating` REAL NOT NULL, `normalized_average_review` REAL NOT NULL, `average_review` REAL NOT NULL, `calories` INTEGER NOT NULL, `preferred` INTEGER NOT NULL, `brewer_name` TEXT NOT NULL, `name` TEXT NOT NULL, `code` TEXT NOT NULL, `city` TEXT NOT NULL, `beerstyle_id` INTEGER NOT NULL, PRIMARY KEY(`beer_id`))",
+        "fields": [
+          {
+            "fieldPath": "uid",
+            "columnName": "beer_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "queryId",
+            "columnName": "query_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "beerName",
+            "columnName": "beer_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "imageUrl",
+            "columnName": "image_url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "styleScore",
+            "columnName": "style_score",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "overallScore",
+            "columnName": "overall_score",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "averageQuickRating",
+            "columnName": "average_quick_rating",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "normalizedAverageReview",
+            "columnName": "normalized_average_review",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "averageReview",
+            "columnName": "average_review",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "calories",
+            "columnName": "calories",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "preferred",
+            "columnName": "preferred",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "brewerName",
+            "columnName": "brewer_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "code",
+            "columnName": "code",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "city",
+            "columnName": "city",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "beerstyleId",
+            "columnName": "beerstyle_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "beer_id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '45057addddc48a25b0c0207f78806149')"
+    ]
+  }
+}

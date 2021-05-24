@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
             setOf(
                 R.id.navigation_preferences,
                 R.id.navigation_explore,
-                R.id.navigation_dashboard,
+                R.id.navigation_search,
                 R.id.navigation_my_beers
             )
         )
@@ -32,5 +32,4 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
-
 }
