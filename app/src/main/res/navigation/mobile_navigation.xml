@@ -12,13 +12,13 @@
         tools:layout="@layout/fragment_preference" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.beehive.beerrate.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_search"
+        android:name="com.beehive.beerrate.ui.search.SearchFragment"
+        android:label="@string/title_search"
+        tools:layout="@layout/fragment_search" />
 
     <fragment
-        android:id="@+id/navigation_search"
+        android:id="@+id/navigation_delete"
         android:name="com.beehive.beerrate.ui.search.SearchFragment"
         android:label="@string/title_search"
         tools:layout="@layout/fragment_search" />
