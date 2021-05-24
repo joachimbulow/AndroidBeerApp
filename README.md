@@ -67,11 +67,14 @@ Of the above BeerRate uses:
 6. Explore beers
     * Swipe left on beers you dislike
     * Swipe right on beers you like
-7. View you liked beers
+7. View your liked beers
     * Click My Beers
     * All beers you swiped right are present here
     * Search for specific beers by entering part of the name in the top search bar
-8. Explore the rest of the app on your own :D
+8. Search for beers
+    * Enter part of a beers name
+    * Click search
+10. Explore the rest of the app on your own :D
 
 
 © Simon Soele Madsen & Benjamin Eichler Staugaard & Joachim Henrik Bülow & Sofie Louise Madsen
