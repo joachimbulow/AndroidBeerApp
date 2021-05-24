@@ -2,7 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:theme="@style/Theme.MaterialComponents.Light"
+    style="@style/AppBottomSheetDialogTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -27,23 +29,23 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        app:layout_constraintBottom_toTopOf="@id/first_divider"
+        app:layout_constraintBottom_toTopOf="@id/ratingBar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bottom_sheet_name_textview" />
+        app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_name_textview" />
 
     <View
         android:id="@+id/first_divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toBottomOf="@id/bottom_sheet_description_textview"
+        app:layout_constraintBottom_toTopOf="@id/bottom_sheet_description_textview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/bottom_sheet_location_and_manf_textview"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ratingBar" />
 
     <TextView
         android:id="@+id/bottom_sheet_description_textview"
@@ -55,4 +57,46 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/first_divider" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:progressTint="#F9DD05"
+        android:secondaryProgressTint="#F9DD05"
+        app:layout_constraintBottom_toTopOf="@+id/first_divider"
+        app:layout_constraintStart_toEndOf="@+id/bottom_sheet_user_rating"
+        app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_location_and_manf_textview" />
+
+    <TextView
+        android:id="@+id/bottom_sheet_user_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/first_divider"
+        app:layout_constraintEnd_toStartOf="@+id/ratingBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_location_and_manf_textview"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/bottom_user_rating"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/user_rating"
+        app:layout_constraintBottom_toTopOf="@+id/first_divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ratingBar"
+        app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_location_and_manf_textview" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

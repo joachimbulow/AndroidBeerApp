@@ -2,13 +2,15 @@ package com.beehive.beerrate.repository
 
 import com.beehive.beerrate.database.BeerDao
 import com.beehive.beerrate.model.Beer
+import com.beehive.beerrate.service.BeerService
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class ExploreRepository @Inject constructor(
-    private val beerDao: BeerDao
+    private val beerDao: BeerDao,
+    private val beerService: BeerService,
 ) {
 
     fun getAllNonPreferredBeers(): Flow<List<Beer>> {
@@ -21,6 +23,10 @@ class ExploreRepository @Inject constructor(
 
     fun updateBeer(beer: Beer) {
         return beerDao.updateBeer(beer)
+    }
+
+    fun beerService(): BeerService {
+        return beerService
     }
 
 }

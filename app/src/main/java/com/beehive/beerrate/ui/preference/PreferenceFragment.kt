@@ -60,17 +60,17 @@ class PreferenceFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        preferenceViewModel.preferredBeerTypes.observe(viewLifecycleOwner, Observer {
+        preferenceViewModel.preferredBeerTypes.observe(viewLifecycleOwner, Observer {t ->
             beerTypesRecyclerView.adapter =
-                BeerTypeAdapter(preferenceViewModel.preferredBeerTypes.value!!)
+                BeerTypeAdapter(t)
         })
 
-        preferenceViewModel.preferredBeerStyles.observe(viewLifecycleOwner, Observer {
+        preferenceViewModel.preferredBeerStyles.observe(viewLifecycleOwner, Observer {t ->
             beerStylesRecyclerView.adapter =
-                BeerStyleAdapter(preferenceViewModel.preferredBeerStyles.value!!)
+                BeerStyleAdapter(t)
         })
 
-        preferenceViewModel.allBeerTypes.observe(viewLifecycleOwner, Observer {
+        preferenceViewModel.allBeerTypes.observe(viewLifecycleOwner, Observer {t->
             editBeerTypesButton.setOnClickListener {
                 if (beerTypesEditMode) {
                     preferenceViewModel.updateBeerTypePreferences()
@@ -78,13 +78,13 @@ class PreferenceFragment : Fragment() {
                     editBeerStyleButton.isEnabled = true
                     editBeerTypesButton.text = getString(R.string.edit)
                     beerTypesRecyclerView.adapter =
-                        BeerTypeAdapter(preferenceViewModel.preferredBeerTypes.value!!)
+                        BeerTypeAdapter(t)
                 } else {
                     beerTypesEditMode = true
                     editBeerStyleButton.isEnabled = false
                     editBeerTypesButton.text = getString(R.string.save)
                     beerTypesRecyclerView.adapter =
-                        BeerTypeEditAdapter(preferenceViewModel.allBeerTypes.value!!)
+                        BeerTypeEditAdapter(t)
 
                 }
                 toggleBeerStyleButton.isEnabled = !beerTypesEditMode
@@ -97,7 +97,7 @@ class PreferenceFragment : Fragment() {
             }
         })
 
-        preferenceViewModel.allBeerStyles.observe(viewLifecycleOwner, Observer {
+        preferenceViewModel.allBeerStyles.observe(viewLifecycleOwner, Observer {t->
             editBeerStyleButton.setOnClickListener {
                 if (beerStylesEditMode) {
                     preferenceViewModel.updateBeerStylePreferences()
@@ -111,13 +111,13 @@ class PreferenceFragment : Fragment() {
                         )
                     )
                     beerStylesRecyclerView.adapter =
-                        BeerStyleAdapter(preferenceViewModel.preferredBeerStyles.value!!)
+                        BeerStyleAdapter(t)
                 } else {
                     beerStylesEditMode = true
                     editBeerTypesButton.isEnabled = false
                     editBeerStyleButton.text = getString(R.string.save)
                     beerStylesRecyclerView.adapter =
-                        BeerStyleEditAdapter(preferenceViewModel.allBeerStyles.value!!)
+                        BeerStyleEditAdapter(t)
                     beerStylesRecyclerView.removeItemDecorationAt(0)
                 }
             }
