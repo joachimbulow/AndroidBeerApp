@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.beehive.beerrate.R
+import com.beehive.beerrate.helper.observeOnce
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,9 +25,9 @@ class SearchFragment : Fragment() {
     private lateinit var searchedBeersRecyclerView: RecyclerView
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         searchViewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_search, container, false)
@@ -34,11 +35,13 @@ class SearchFragment : Fragment() {
 
         // Init recycler view
         searchedBeersRecyclerView = root.findViewById(R.id.searchBeerRecyclerView)
-        searchedBeersRecyclerView.adapter = BeerAdapter(emptyList(), searchViewModel, parentFragmentManager);
+        searchedBeersRecyclerView.adapter =
+            BeerAdapter(emptyList(), searchViewModel, parentFragmentManager);
         searchedBeersRecyclerView.layoutManager = LinearLayoutManager(activity)
 
-        val decoration: DividerItemDecoration = DividerItemDecoration(searchedBeersRecyclerView.context, LinearLayoutManager.VERTICAL)
-
+        searchedBeersRecyclerView.addItemDecoration(
+            DividerItemDecoration(searchedBeersRecyclerView.context, LinearLayoutManager.VERTICAL)
+        )
         //Init search button
         var searchEditText: EditText = root.findViewById(R.id.searchEditText)
         var button: Button = root.findViewById(R.id.searchBtn)
@@ -64,9 +67,10 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        searchViewModel.beerObservable.observe(viewLifecycleOwner, {
-        searchedBeersRecyclerView.adapter = BeerAdapter(searchViewModel.beerObservable.value!!, searchViewModel, parentFragmentManager)
-    })
+        searchViewModel.beerObservable.observe(viewLifecycleOwner, Observer { t ->
+            searchedBeersRecyclerView.adapter =
+                BeerAdapter(t, searchViewModel, parentFragmentManager)
+        })
 
 
     }
