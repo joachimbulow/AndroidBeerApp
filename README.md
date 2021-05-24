@@ -40,8 +40,8 @@ Of the above BeerRate uses:
 | Fragments              | :heavy_check_mark:       | BeerRate is a single activity app using multiple framgents                                   |
 | Threading (Coroutines) | :heavy_check_mark:       | Coroutines are used for database interaction using Kotling Flow and web service calls        |
 | Android MVVM           | :heavy_check_mark:       | For supplying views with model data                                                          |
-| Web Service Calls      | :heavy_check_mark:       | Retrieval of images and beer reviews                                                         |
-| External Libraries     | :heavy_check_mark:       | Multiple external libraries for fetching images using Glide, Material UI, GSON for web data, Dagger Hilt for dependency injection, CardStackView for Tinder-like swipe functionality, etc |
+| Web Service Calls      | :heavy_check_mark:       | Retrieval of images                                                                          |
+| External Libraries     | :heavy_check_mark:       | Multiple external libraries for fetching images using Glide, Material UI, Dagger Hilt for dependency injection, CardStackView for Tinder-like swipe functionality, etc |
 | Database               | :heavy_check_mark:       | Beers, beer styles, and beer types are stored in a database using Room                       |
 
 ### Screenshots
