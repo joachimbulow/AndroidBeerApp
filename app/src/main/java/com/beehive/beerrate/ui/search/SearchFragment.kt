@@ -34,7 +34,7 @@ class SearchFragment : Fragment() {
 
         // Init recycler view
         searchedBeersRecyclerView = root.findViewById(R.id.searchBeerRecyclerView)
-        searchedBeersRecyclerView.adapter = BeerAdapter(emptyList());
+        searchedBeersRecyclerView.adapter = BeerAdapter(emptyList(), searchViewModel);
         searchedBeersRecyclerView.layoutManager = LinearLayoutManager(activity)
 
         val decoration: DividerItemDecoration = DividerItemDecoration(searchedBeersRecyclerView.context, LinearLayoutManager.VERTICAL)
@@ -65,7 +65,7 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         searchViewModel.beerObservable.observe(viewLifecycleOwner, {
-        searchedBeersRecyclerView.adapter = BeerAdapter(searchViewModel.beerObservable.value!!)
+        searchedBeersRecyclerView.adapter = BeerAdapter(searchViewModel.beerObservable.value!!, searchViewModel)
     })
 
 

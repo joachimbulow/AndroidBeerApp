@@ -5,11 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
+import androidx.lifecycle.get
 import androidx.recyclerview.widget.RecyclerView
 import com.beehive.beerrate.R
 import com.beehive.beerrate.model.Beer
 
-class BeerAdapter(var beers: List<Beer>) : RecyclerView.Adapter<BeerAdapter.BeerViewHolder>() {
+class BeerAdapter(var beers: List<Beer>, var viewmodel: SearchViewModel) : RecyclerView.Adapter<BeerAdapter.BeerViewHolder>() {
 
     inner class BeerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val beerViewText: TextView = itemView.findViewById(R.id.beerText)
@@ -45,7 +48,8 @@ class BeerAdapter(var beers: List<Beer>) : RecyclerView.Adapter<BeerAdapter.Beer
             beers = mutableBeers.toList()
             notifyDataSetChanged()
 
-            //Actually prefering a beer
+            //Actually preferring a beer
+            viewmodel.updateBeer(beers[position])
 
 
         }
@@ -60,6 +64,5 @@ class BeerAdapter(var beers: List<Beer>) : RecyclerView.Adapter<BeerAdapter.Beer
     fun toggleBeerPreference(beer: Beer) {
         beer.preferred = !beer.preferred
     }
-
 
 }
