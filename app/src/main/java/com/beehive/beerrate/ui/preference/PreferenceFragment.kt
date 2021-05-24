@@ -61,17 +61,17 @@ class PreferenceFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        preferenceViewModel.preferredBeerTypes.observe(viewLifecycleOwner, Observer {t ->
+        preferenceViewModel.preferredBeerTypes.observe(viewLifecycleOwner, Observer { t ->
             beerTypesRecyclerView.adapter =
                 BeerTypeAdapter(t)
         })
 
-        preferenceViewModel.preferredBeerStyles.observe(viewLifecycleOwner, Observer {t ->
+        preferenceViewModel.preferredBeerStyles.observe(viewLifecycleOwner, Observer { t ->
             beerStylesRecyclerView.adapter =
                 BeerStyleAdapter(t)
         })
 
-        preferenceViewModel.allBeerTypes.observe(viewLifecycleOwner, Observer {t->
+        preferenceViewModel.allBeerTypes.observe(viewLifecycleOwner, Observer { t ->
             editBeerTypesButton.setOnClickListener {
                 if (beerTypesEditMode) {
                     preferenceViewModel.updateBeerTypePreferences()
@@ -98,12 +98,13 @@ class PreferenceFragment : Fragment() {
             }
         })
 
-        preferenceViewModel.allBeerStyles.observe(viewLifecycleOwner, Observer {t->
+        preferenceViewModel.allBeerStyles.observe(viewLifecycleOwner, Observer { t ->
             editBeerStyleButton.setOnClickListener {
                 if (beerStylesEditMode) {
                     preferenceViewModel.updateBeerStylePreferences()
                     beerStylesEditMode = false
-                    editBeerTypesButton.isEnabled = true
+                    editBeerTypesButton.isEnabled = beerTypesRecyclerView.visibility == View.VISIBLE
+                    toggleBeerStyleButton.isEnabled = true
                     editBeerStyleButton.text = getString(R.string.edit)
                     beerStylesRecyclerView.addItemDecoration(
                         DividerItemDecoration(
@@ -116,6 +117,7 @@ class PreferenceFragment : Fragment() {
                 } else {
                     beerStylesEditMode = true
                     editBeerTypesButton.isEnabled = false
+                    toggleBeerStyleButton.isEnabled = false
                     editBeerStyleButton.text = getString(R.string.save)
                     beerStylesRecyclerView.adapter =
                         BeerStyleEditAdapter(t)
