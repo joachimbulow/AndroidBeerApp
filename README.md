@@ -25,7 +25,7 @@ This means that we use these mandatory technologies as a minimum. Of course, we 
   
 </details>
 
-BeerRate is a beer rating app. In the app, you will be able to browse beers using a swipe concept similar to that of the Tinder app. Beer suggestions are based on your pre-specified beer type and style preferences. Furthermore, you can browse and search for beers in a catalog of beers you liked.
+BeerRate is a beer rating app. In the app, you will be able to browse beers using a swipe concept similar to that of the Tinder app. Beer suggestions are based on your pre-specified beer type and style preferences. You can search for beers you like to add them to your preference list, and furthermore, you can browse and search for beers in a catalog of beers you liked.
 
 ### Project Requirements
 
