@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_preferences">
+    app:startDestination="@id/navigation_search">
 
     <fragment
         android:id="@+id/navigation_preferences"
@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_preference" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.beehive.beerrate.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_search"
+        android:name="com.beehive.beerrate.ui.search.SearchFragment"
+        android:label="@string/title_search"
+        tools:layout="@layout/fragment_search" />
 
     <fragment
         android:id="@+id/navigation_my_beers"

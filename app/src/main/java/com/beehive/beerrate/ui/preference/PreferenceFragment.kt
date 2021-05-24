@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.beehive.beerrate.R
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class PreferenceFragment : Fragment() {
 
