@@ -29,7 +29,7 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:showDividers="middle"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/card_stack_view">
@@ -38,13 +38,13 @@
             android:id="@+id/explore_skip_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:fabSize="auto"
             android:clickable="true"
             android:contentDescription="@string/skip"
             android:elevation="1dp"
             android:src="@drawable/skip_red"
-            app:elevation="1dp"
             app:borderWidth="0dp"
+            app:elevation="1dp"
+            app:fabSize="auto"
             app:rippleColor="#FF0000"
             app:tint="#FF0000" />
 
@@ -55,25 +55,25 @@
             android:clickable="true"
             android:contentDescription="@string/pref"
             android:elevation="1dp"
-            app:borderWidth="0dp"
             android:src="@drawable/like_green"
+            app:borderWidth="0dp"
             app:elevation="1dp"
             app:rippleColor="#6FE2B3"
             app:tint="#6FE2B3" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/explore_info_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:contentDescription="@string/pref"
+            android:elevation="1dp"
+            android:src="@drawable/ic_baseline_info_24"
+            app:borderWidth="0dp"
+            app:elevation="1dp"
+            app:rippleColor="@android:color/holo_blue_dark"
+            app:tint="@android:color/holo_blue_dark" />
+
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_weight="1"
-        android:src="@android:drawable/arrow_up_float"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_row"
-        app:tint="#27000000" />
 </androidx.constraintlayout.widget.ConstraintLayout>

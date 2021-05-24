@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +23,7 @@ class PreferenceFragment : Fragment() {
     private lateinit var beerStylesRecyclerView: RecyclerView
     private lateinit var editBeerTypesButton: Button
     private lateinit var editBeerStyleButton: Button
+    private lateinit var toggleBeerStyleButton: Button
     private var beerTypesEditMode = false
     private var beerStylesEditMode = false
 
@@ -43,10 +44,16 @@ class PreferenceFragment : Fragment() {
         beerStylesRecyclerView = root.findViewById(R.id.preferences_styles_of_beer_recyclerView)
         beerStylesRecyclerView.adapter = BeerStyleAdapter(emptyList())
         beerStylesRecyclerView.layoutManager = LinearLayoutManager(activity)
-        beerStylesRecyclerView.addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
+        beerStylesRecyclerView.addItemDecoration(
+            DividerItemDecoration(
+                activity,
+                DividerItemDecoration.VERTICAL
+            )
+        )
 
         editBeerTypesButton = root.findViewById(R.id.preferences_types_of_beer_edit)
         editBeerStyleButton = root.findViewById(R.id.preferences_styles_of_beer_edit)
+        toggleBeerStyleButton = root.findViewById(R.id.preferences_types_of_beer_toggle)
         return root
     }
 
@@ -80,6 +87,13 @@ class PreferenceFragment : Fragment() {
                         BeerTypeEditAdapter(preferenceViewModel.allBeerTypes.value!!)
 
                 }
+                toggleBeerStyleButton.isEnabled = !beerTypesEditMode
+            }
+            toggleBeerStyleButton.setOnClickListener {
+                val visibility =
+                    if (beerTypesRecyclerView.visibility == View.GONE) View.VISIBLE else View.GONE
+                beerTypesRecyclerView.visibility = visibility
+                editBeerTypesButton.isEnabled = visibility == View.VISIBLE
             }
         })
 
@@ -90,7 +104,12 @@ class PreferenceFragment : Fragment() {
                     beerStylesEditMode = false
                     editBeerTypesButton.isEnabled = true
                     editBeerStyleButton.text = getString(R.string.edit)
-                    beerStylesRecyclerView.addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
+                    beerStylesRecyclerView.addItemDecoration(
+                        DividerItemDecoration(
+                            activity,
+                            DividerItemDecoration.VERTICAL
+                        )
+                    )
                     beerStylesRecyclerView.adapter =
                         BeerStyleAdapter(preferenceViewModel.preferredBeerStyles.value!!)
                 } else {

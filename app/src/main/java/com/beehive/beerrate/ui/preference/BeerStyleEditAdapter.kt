@@ -1,6 +1,5 @@
 package com.beehive.beerrate.ui.preference
 
-import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.beehive.beerrate.R
-import com.beehive.beerrate.helper.ResolveAttrColor
 import com.beehive.beerrate.model.BeerStyle
 
 class BeerStyleEditAdapter(var allBeerStyles: List<BeerStyle>) :
@@ -21,13 +19,16 @@ class BeerStyleEditAdapter(var allBeerStyles: List<BeerStyle>) :
         fun bind(beerStyle: BeerStyle) {
             beerStyleEditTextView.text = beerStyle.name
             originalTextViewColor = beerStyleEditTextView.currentTextColor
-            beerStyleEditTextView.setBackgroundColor(if (beerStyle.preferred) ResolveAttrColor.resolve(beerStyleEditTextView.context,R.attr.colorPrimary) else 0)
-            beerStyleEditTextView.setTextColor(if (beerStyle.preferred) Color.WHITE else originalTextViewColor)
+            setEntryStyle(beerStyle)
             beerStyleEditTextView.setOnClickListener {
                 beerStyle.preferred = !beerStyle.preferred
-                beerStyleEditTextView.setBackgroundColor(if (beerStyle.preferred) ResolveAttrColor.resolve(beerStyleEditTextView.context,R.attr.colorPrimary) else 0)
-                beerStyleEditTextView.setTextColor(if (beerStyle.preferred) Color.WHITE else originalTextViewColor)
+                setEntryStyle(beerStyle)
             }
+        }
+
+        private fun setEntryStyle(beerStyle: BeerStyle) {
+            beerStyleEditTextView.setTextColor(if (beerStyle.preferred) Color.parseColor("#2e7d32") else Color.RED)
+            beerStyleEditTextView.text = itemView.resources.getString(R.string.beer_style, if (beerStyle.preferred) "✔   " else "✖   ", beerStyle.name)
         }
     }
 

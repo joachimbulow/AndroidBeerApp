@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_preferences,
                 R.id.navigation_explore,
                 R.id.navigation_search,
-                R.id.navigation_delete
+                R.id.navigation_my_beers
             )
         )
         navView.setOnApplyWindowInsetsListener(null)
