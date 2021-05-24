@@ -5,14 +5,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.get
 import androidx.recyclerview.widget.RecyclerView
 import com.beehive.beerrate.R
 import com.beehive.beerrate.model.Beer
+import com.beehive.beerrate.ui.beerbottomsheet.BeerBottomSheetFragment
 
-class BeerAdapter(var beers: List<Beer>, var viewmodel: SearchViewModel) : RecyclerView.Adapter<BeerAdapter.BeerViewHolder>() {
+class BeerAdapter(var beers: List<Beer>, var viewmodel: SearchViewModel,  val fragmentManager: FragmentManager) : RecyclerView.Adapter<BeerAdapter.BeerViewHolder>() {
 
     inner class BeerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val beerViewText: TextView = itemView.findViewById(R.id.beerText)
@@ -30,6 +32,9 @@ class BeerAdapter(var beers: List<Beer>, var viewmodel: SearchViewModel) : Recyc
             else {
                 preferBtn.text = "Prefer"
             }
+            itemView.setOnClickListener{
+                BeerBottomSheetFragment(beer).show(fragmentManager, "MyBeerBottomSheet")
+            }
         }
     }
 
@@ -46,7 +51,6 @@ class BeerAdapter(var beers: List<Beer>, var viewmodel: SearchViewModel) : Recyc
             val mutableBeers = beers.toMutableList()
             toggleBeerPreference(mutableBeers[position])
             beers = mutableBeers.toList()
-            notifyDataSetChanged()
 
             //Actually preferring a beer
             viewmodel.updateBeer(beers[position])
