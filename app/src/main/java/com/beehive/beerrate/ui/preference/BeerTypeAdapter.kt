@@ -1,5 +1,7 @@
 package com.beehive.beerrate.ui.preference
 
+import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,21 +10,37 @@ import androidx.recyclerview.widget.RecyclerView
 import com.beehive.beerrate.R
 import com.beehive.beerrate.model.BeerType
 
-class BeerTypeAdapter(var beerTypes: List<BeerType>) :
-    RecyclerView.Adapter<BeerTypeAdapter.BeerTypeViewHolder>() {
+class BeerTypeAdapter(private var beerTypes: List<BeerType>) : RecyclerView.Adapter<BeerTypeAdapter.BeerTypeViewHolder>() {
+
+    var edit = false
 
     inner class BeerTypeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val beerTypeTextView: TextView = itemView.findViewById(R.id.beer_type_textView)
 
         fun bind(beerType: BeerType) {
-            beerTypeTextView.text = itemView.resources.getString(R.string.beer_type, "", beerType.type)
+            if (edit) {
+                beerTypeTextView.text = beerType.type
+                setEntryStyle(beerType)
+
+                beerTypeTextView.setOnClickListener {
+                    beerType.preferred = !beerType.preferred
+                    setEntryStyle(beerType)
+                }
+            } else {
+                beerTypeTextView.text = itemView.resources.getString(R.string.beer_type, "", beerType.type)
+                beerTypeTextView.setTextColor(-1979711488)
+                beerTypeTextView.setOnClickListener {}
+            }
+        }
+
+        private fun setEntryStyle(beerType: BeerType) {
+            beerTypeTextView.setTextColor(if (beerType.preferred) Color.parseColor("#2e7d32") else Color.RED)
+            beerTypeTextView.text = itemView.resources.getString(R.string.beer_type, if (beerType.preferred) "✔   " else "✖   ", beerType.type)
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BeerTypeViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.beer_type_textview, parent, false)
-        return BeerTypeViewHolder(view)
+        return BeerTypeViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.beer_type_textview, parent, false))
     }
 
     override fun getItemCount(): Int {
@@ -31,5 +49,10 @@ class BeerTypeAdapter(var beerTypes: List<BeerType>) :
 
     override fun onBindViewHolder(holder: BeerTypeViewHolder, position: Int) {
         return holder.bind(beerTypes[position])
+    }
+
+    fun setBeerTypes(beerTypes: List<BeerType>) {
+        this.beerTypes = beerTypes
+        notifyDataSetChanged()
     }
 }
