@@ -45,12 +45,7 @@ class PreferenceFragment : Fragment() {
         beerStylesRecyclerView = root.findViewById(R.id.preferences_styles_of_beer_recyclerView)
         beerStylesRecyclerView.adapter = BeerStyleAdapter(emptyList())
         beerStylesRecyclerView.layoutManager = LinearLayoutManager(activity)
-        beerStylesRecyclerView.addItemDecoration(
-            DividerItemDecoration(
-                activity,
-                DividerItemDecoration.VERTICAL
-            )
-        )
+        beerStylesRecyclerView.addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
 
         editBeerTypesButton = root.findViewById(R.id.preferences_types_of_beer_edit)
         editBeerStyleButton = root.findViewById(R.id.preferences_styles_of_beer_edit)
