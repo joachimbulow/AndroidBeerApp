@@ -29,11 +29,7 @@ class ExploreFragment : Fragment(), CardStackListener {
     private val manager by lazy { CardStackLayoutManager(activity, this) }
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewModel = ViewModelProvider(this).get(ExploreViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_explore, container, false)
         cardStackView = root.findViewById(R.id.card_stack_view)
@@ -51,41 +47,31 @@ class ExploreFragment : Fragment(), CardStackListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.allNonPreferredBeers.observeOnce(viewLifecycleOwner, Observer {t ->
+        viewModel.allNonPreferredBeers.observeOnce(viewLifecycleOwner, Observer { t ->
             adapter = CardStackAdapter(t)
             cardStackView.adapter = adapter
-
             checkCount()
         })
-
 
         prefButton.setOnClickListener {
             cardStackView.swipe()
             updateTopBeer(0)
         }
 
-        skipButton.setOnClickListener {
-            cardStackView.swipe()
-        }
+        skipButton.setOnClickListener { cardStackView.swipe() }
 
-        infoButton.setOnClickListener {
-            showBottomSheetBeerDialog()
-        }
+        infoButton.setOnClickListener { showBottomSheetBeerDialog() }
     }
 
 
     private fun showBottomSheetBeerDialog() {
-        if(adapter.itemCount <= manager.topPosition ) return
-        BeerBottomSheetFragment(adapter.getItem(manager.topPosition)).show(parentFragmentManager,"BOTTOM")
+        if (adapter.itemCount <= manager.topPosition) return
+        BeerBottomSheetFragment(adapter.getItem(manager.topPosition)).show(parentFragmentManager, "BOTTOM")
     }
 
-    override fun onCardDisappeared(view: View?, position: Int) {
-        checkCount()
-    }
+    override fun onCardDisappeared(view: View?, position: Int) = checkCount()
 
-    override fun onCardDragging(direction: Direction?, ratio: Float) {
-
-    }
+    override fun onCardDragging(direction: Direction?, ratio: Float) = Unit
 
     override fun onCardSwiped(direction: Direction?) {
         if (direction == Direction.Left) {
@@ -93,25 +79,19 @@ class ExploreFragment : Fragment(), CardStackListener {
         }
     }
 
-    fun updateTopBeer(offset: Int) {
-        if(adapter.itemCount <= manager.topPosition ) return
+    private fun updateTopBeer(offset: Int) {
+        if (adapter.itemCount <= manager.topPosition) return
         val beer = adapter.getItem(manager.topPosition + offset)
         beer.preferred = true
         viewModel.updateBeer(listOf(beer))
 
     }
 
-    override fun onCardCanceled() {
+    override fun onCardCanceled() = Unit
 
-    }
+    override fun onCardAppeared(view: View?, position: Int) = Unit
 
-    override fun onCardAppeared(view: View?, position: Int) {
-
-    }
-
-    override fun onCardRewound() {
-
-    }
+    override fun onCardRewound() = Unit
 
     private fun checkCount() {
         if (adapter.itemCount < 1) {

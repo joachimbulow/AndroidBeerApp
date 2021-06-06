@@ -9,8 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class PreferenceViewModel @Inject constructor(private val beerPreferenceRepository: BeerPreferenceRepository) :
-    ViewModel() {
+class PreferenceViewModel @Inject constructor(private val beerPreferenceRepository: BeerPreferenceRepository) : ViewModel() {
 
     val allBeerTypes = beerPreferenceRepository.getBeerTypes().asLiveData()
     val preferredBeerTypes = beerPreferenceRepository.getBeerTypePreferences().asLiveData()
@@ -18,30 +17,20 @@ class PreferenceViewModel @Inject constructor(private val beerPreferenceReposito
     val preferredBeerStyles = beerPreferenceRepository.getBeerStylePreferences().asLiveData()
 
     fun updateBeerTypePreferences() {
-        val diff =
-            allBeerTypes.value!!.minus(preferredBeerTypes.value!!.toHashSet())
+        val diff = allBeerTypes.value!!.minus(preferredBeerTypes.value!!.toHashSet())
         val preferredStyles = allBeerStyles.value!!
-        UpdateBeerTypesAsyncTask(
-            beerPreferenceRepository,
-            preferredStyles
-        ).execute(*diff.toTypedArray())
+        UpdateBeerTypesAsyncTask(beerPreferenceRepository, preferredStyles).execute(*diff.toTypedArray())
     }
 
     fun updateBeerStylePreferences() {
         val diff = allBeerStyles.value!!.minus(preferredBeerStyles.value!!.toHashSet())
-        UpdateBeerStylesAsyncTask(beerPreferenceRepository)
-            .execute(*diff.toTypedArray())
+        UpdateBeerStylesAsyncTask(beerPreferenceRepository).execute(*diff.toTypedArray())
     }
 
     companion object {
-
-        private class UpdateBeerTypesAsyncTask(
-            private val beerPreferenceRepository: BeerPreferenceRepository,
-            private val allBeerStyles: List<BeerStyle>
-        ) :
-            AsyncTask<BeerType, Void, Void>() {
-            override fun doInBackground(vararg params: BeerType?): Void? {
-                for (beerType in params) {
+        private class UpdateBeerTypesAsyncTask(private val beerPreferenceRepository: BeerPreferenceRepository, private val allBeerStyles: List<BeerStyle>) : AsyncTask<BeerType, Void, Void>() {
+            override fun doInBackground(vararg beerTypes: BeerType?): Void? {
+                for (beerType in beerTypes) {
                     beerPreferenceRepository.updatePreferredBeerType(beerType!!)
                     for (beerStyle in allBeerStyles) {
                         if (!beerType.preferred && beerStyle.beerTypeId == beerType.uid) {
@@ -57,13 +46,9 @@ class PreferenceViewModel @Inject constructor(private val beerPreferenceReposito
             }
         }
 
-        private class UpdateBeerStylesAsyncTask(
-            private val beerPreferenceRepository: BeerPreferenceRepository
-        ) : AsyncTask<BeerStyle, Void, Void>() {
-            override fun doInBackground(vararg params: BeerStyle?): Void? {
-                for (beerStyle in params) {
-                    beerPreferenceRepository.updatePreferredBeerStyle(beerStyle!!)
-                }
+        private class UpdateBeerStylesAsyncTask(private val beerPreferenceRepository: BeerPreferenceRepository) : AsyncTask<BeerStyle, Void, Void>() {
+            override fun doInBackground(vararg beerStyle: BeerStyle?): Void? {
+                beerStyle.forEach { it?.let(beerPreferenceRepository::updatePreferredBeerStyle) }
                 return null
             }
         }

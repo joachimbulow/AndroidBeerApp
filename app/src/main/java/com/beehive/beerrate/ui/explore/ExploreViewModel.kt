@@ -9,10 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class ExploreViewModel @Inject constructor(
-    private val exploreRepository: ExploreRepository,
-) :
-    ViewModel() {
+class ExploreViewModel @Inject constructor(private val exploreRepository: ExploreRepository) : ViewModel() {
 
     val allNonPreferredBeers = exploreRepository.getAllNonPreferredBeersRandomOrder().asLiveData()
 
@@ -21,13 +18,9 @@ class ExploreViewModel @Inject constructor(
     }
 
     companion object {
-        private class UpdateBeerAsyncTask(
-            private val exploreRepository: ExploreRepository
-        ) : AsyncTask<Beer, Void, Void>() {
-            override fun doInBackground(vararg params: Beer?): Void? {
-                for (beer in params) {
-                    exploreRepository.updateBeer(beer!!)
-                }
+        private class UpdateBeerAsyncTask(private val exploreRepository: ExploreRepository) : AsyncTask<Beer, Void, Void>() {
+            override fun doInBackground(vararg beers: Beer?): Void? {
+                beers.forEach { it?.let(exploreRepository::updateBeer) }
                 return null
             }
         }

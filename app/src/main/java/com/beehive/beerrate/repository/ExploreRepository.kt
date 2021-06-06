@@ -4,8 +4,6 @@ import com.beehive.beerrate.database.BeerDao
 import com.beehive.beerrate.model.Beer
 import com.beehive.beerrate.service.BeerService
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.count
-import kotlinx.coroutines.flow.distinctUntilChanged
 import javax.inject.Inject
 import javax.inject.Singleton
 

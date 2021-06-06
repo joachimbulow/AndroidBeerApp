@@ -7,8 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MyBeersViewModel @Inject constructor(myBeersRepository: MyBeersRepository) :
-    ViewModel() {
+class MyBeersViewModel @Inject constructor(myBeersRepository: MyBeersRepository) : ViewModel() {
 
     val prefBeers = myBeersRepository.getPreferredBeers().asLiveData()
 }

@@ -29,11 +29,7 @@ class PreferenceFragment : Fragment() {
     private var beerTypesEditMode = false
     private var beerStylesEditMode = false
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         preferenceViewModel = ViewModelProvider(this).get(PreferenceViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_preference, container, false)
 
@@ -75,8 +71,7 @@ class PreferenceFragment : Fragment() {
                 toggleBeerStyleButton.isEnabled = !beerTypesEditMode
             }
             toggleBeerStyleButton.setOnClickListener {
-                val visibility =
-                    if (beerTypesRecyclerView.visibility == View.GONE) View.VISIBLE else View.GONE
+                val visibility = if (beerTypesRecyclerView.visibility == View.GONE) View.VISIBLE else View.GONE
                 beerTypesRecyclerView.visibility = visibility
                 editBeerTypesButton.isEnabled = visibility == View.VISIBLE
             }

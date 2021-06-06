@@ -7,7 +7,7 @@
     tools:context=".ui.search.SearchFragment">
 
     <TextView
-        android:id="@+id/text_notifications"
+        android:id="@+id/search_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -33,7 +33,7 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_notifications"
+        app:layout_constraintTop_toBottomOf="@+id/search_header"
         tools:ignore="LabelFor" />
 
     <Button

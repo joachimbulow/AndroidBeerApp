@@ -10,9 +10,7 @@ import com.beehive.beerrate.R
 import com.beehive.beerrate.model.Beer
 import com.bumptech.glide.Glide
 
-class CardStackAdapter(
-    private var beers: List<Beer> = emptyList()
-) : RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
+class CardStackAdapter(private var beers: List<Beer> = emptyList()) : RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private var image: ImageView = view.findViewById(R.id.item_image)
@@ -27,20 +25,12 @@ class CardStackAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val inflater =
-            LayoutInflater.from(parent.context).inflate(R.layout.beer_cardview, parent, false)
-        return ViewHolder(inflater)
+        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.beer_cardview, parent, false))
     }
 
-    override fun getItemCount(): Int {
-        return beers.size
-    }
+    override fun getItemCount(): Int = beers.size
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        return holder.bind(beers[position])
-    }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(beers[position])
 
-    fun getItem(position: Int): Beer {
-        return beers[position]
-    }
+    fun getItem(position: Int): Beer = beers[position]
 }

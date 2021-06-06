@@ -11,36 +11,27 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(private val exploreRepository: ExploreRepository) : ViewModel() {
 
     //Search logic
-
-    val mutableSearchString: MutableLiveData<String> = MutableLiveData()
+    private val mutableSearchString: MutableLiveData<String> = MutableLiveData()
 
     fun searchForBeer(query: String) {
-        mutableSearchString.value = query;
+        mutableSearchString.value = query
     }
 
     val beerObservable: LiveData<List<Beer>> = Transformations.switchMap(mutableSearchString) { query ->
         exploreRepository.searchBeer(query).asLiveData()
     }
 
-    fun updateBeer(beer: Beer){
+    fun updateBeer(beer: Beer) {
         UpdateBeerAsyncTask(exploreRepository, beer).execute()
     }
 
-    // // // //
-
     companion object {
-        private class UpdateBeerAsyncTask(private val exploreRepository: ExploreRepository, private val beer: Beer): AsyncTask<Beer, Void, Void>(){
-            override fun doInBackground(vararg p0: Beer?): Void? {
-                exploreRepository.updateBeer(beer)
+        private class UpdateBeerAsyncTask(private val exploreRepository: ExploreRepository, private val beer: Beer) : AsyncTask<Beer, Void, Void>() {
+            override fun doInBackground(vararg beer: Beer?): Void? {
+                exploreRepository.updateBeer(this.beer)
                 return null
             }
 
         }
     }
-
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "Search for beers"
-    }
-    val text: LiveData<String> = _text
 }

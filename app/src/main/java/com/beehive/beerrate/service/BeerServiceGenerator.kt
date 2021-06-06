@@ -13,6 +13,7 @@ object BeerServiceGenerator {
         .addConverterFactory(GsonConverterFactory.create())
     private var retrofit = builder.build()
     private val httpClient = OkHttpClient.Builder()
+
     fun <S> createService(serviceClass: Class<S>?): S {
         httpClient.interceptors().clear()
         httpClient.addInterceptor { chain ->

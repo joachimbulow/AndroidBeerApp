@@ -7,15 +7,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.beehive.beerrate.R
 import com.beehive.beerrate.model.BeerStyle
 
-class BeerStyleAdapter(private var beerStyles: List<BeerStyle>) :
-    RecyclerView.Adapter<BeerStyleAdapter.BeerStyleViewHolder>() {
+class BeerStyleAdapter(private var beerStyles: List<BeerStyle>) : RecyclerView.Adapter<BeerStyleAdapter.BeerStyleViewHolder>() {
 
     var editMode = false
 
     inner class BeerStyleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val beerStyleTextView: TextView = itemView.findViewById(R.id.beer_style_textView)
         private val beerStyleDescriptionTextView: TextView = itemView.findViewById(R.id.beer_style_description)
-
 
         fun bind(beerStyle: BeerStyle) {
             beerStyleTextView.text = beerStyle.name
@@ -27,9 +25,7 @@ class BeerStyleAdapter(private var beerStyles: List<BeerStyle>) :
                 beerStyleDescriptionTextView.setOnClickListener {
                     if (expanded) {
                         beerStyleDescriptionTextView.maxLines = 3
-                    } else {
-                        beerStyleDescriptionTextView.maxLines = Integer.MAX_VALUE
-                    }
+                    } else beerStyleDescriptionTextView.maxLines = Integer.MAX_VALUE
                     expanded = !expanded
                 }
             } else {
@@ -49,9 +45,7 @@ class BeerStyleAdapter(private var beerStyles: List<BeerStyle>) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BeerStyleViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.beer_style_textview, parent, false)
-        return BeerStyleViewHolder(view)
+        return BeerStyleViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.beer_style_textview, parent, false))
     }
 
     override fun getItemCount(): Int = beerStyles.size

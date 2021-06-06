@@ -14,7 +14,7 @@ import com.beehive.beerrate.R
 import com.beehive.beerrate.model.Beer
 import com.beehive.beerrate.ui.beerbottomsheet.BeerBottomSheetFragment
 
-class BeerAdapter(var beers: List<Beer>, var viewmodel: SearchViewModel,  val fragmentManager: FragmentManager) : RecyclerView.Adapter<BeerAdapter.BeerViewHolder>() {
+class BeerAdapter(var beers: List<Beer>, var viewmodel: SearchViewModel, val fragmentManager: FragmentManager) : RecyclerView.Adapter<BeerAdapter.BeerViewHolder>() {
 
     inner class BeerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val beerViewText: TextView = itemView.findViewById(R.id.beerText)
@@ -26,27 +26,18 @@ class BeerAdapter(var beers: List<Beer>, var viewmodel: SearchViewModel,  val fr
             beerViewText.text = beer.beerName
             brewerNameText.text = beer.brewerName
             countryCodeText.text = beer.code
-            if (beer.preferred) {
-                preferBtn.text = "Non-prefer"
-            }
-            else {
-                preferBtn.text = "Prefer"
-            }
-            itemView.setOnClickListener{
-                BeerBottomSheetFragment(beer).show(fragmentManager, "MyBeerBottomSheet")
-            }
+            preferBtn.text = if (beer.preferred) "Non-prefer" else "Prefer"
+            itemView.setOnClickListener { BeerBottomSheetFragment(beer).show(fragmentManager, "MyBeerBottomSheet") }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BeerViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.beerview, parent, false)
-        return BeerViewHolder(view)
+        return BeerViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.beerview, parent, false))
     }
 
     override fun onBindViewHolder(holder: BeerViewHolder, position: Int) {
         //On click for toggling preference
-        holder.preferBtn.setOnClickListener{
+        holder.preferBtn.setOnClickListener {
             //For UI
             val mutableBeers = beers.toMutableList()
             toggleBeerPreference(mutableBeers[position])
@@ -54,18 +45,14 @@ class BeerAdapter(var beers: List<Beer>, var viewmodel: SearchViewModel,  val fr
 
             //Actually preferring a beer
             viewmodel.updateBeer(beers[position])
-
-
         }
         //Handle binding
         return holder.bind(beers[position])
     }
 
-    override fun getItemCount(): Int {
-        return beers.size
-    }
+    override fun getItemCount(): Int = beers.size
 
-    fun toggleBeerPreference(beer: Beer) {
+    private fun toggleBeerPreference(beer: Beer) {
         beer.preferred = !beer.preferred
     }
 
