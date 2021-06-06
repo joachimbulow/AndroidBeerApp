@@ -1,7 +1,6 @@
 package com.beehive.beerrate.ui.preference
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -106,14 +105,14 @@ class PreferenceFragment : Fragment() {
 
     private fun updateBeerTypesAdapter(beerTypes: List<BeerType>) {
         (beerTypesRecyclerView.adapter as BeerTypeAdapter).apply {
-            edit = beerTypesEditMode
+            editMode = beerTypesEditMode
             setBeerTypes(beerTypes)
         }
     }
 
     private fun updateBeerStylesAdapter(beerStyles: List<BeerStyle>) {
         (beerStylesRecyclerView.adapter as BeerStyleAdapter).apply {
-            edit = beerStylesEditMode
+            editMode = beerStylesEditMode
             setBeerStyles(beerStyles)
         }
     }

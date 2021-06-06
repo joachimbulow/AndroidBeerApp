@@ -1,7 +1,6 @@
 package com.beehive.beerrate.ui.preference
 
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,13 +11,13 @@ import com.beehive.beerrate.model.BeerType
 
 class BeerTypeAdapter(private var beerTypes: List<BeerType>) : RecyclerView.Adapter<BeerTypeAdapter.BeerTypeViewHolder>() {
 
-    var edit = false
+    var editMode = false
 
     inner class BeerTypeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val beerTypeTextView: TextView = itemView.findViewById(R.id.beer_type_textView)
 
         fun bind(beerType: BeerType) {
-            if (edit) {
+            if (editMode) {
                 beerTypeTextView.text = beerType.type
                 setEntryStyle(beerType)
 
@@ -43,13 +42,9 @@ class BeerTypeAdapter(private var beerTypes: List<BeerType>) : RecyclerView.Adap
         return BeerTypeViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.beer_type_textview, parent, false))
     }
 
-    override fun getItemCount(): Int {
-        return beerTypes.size
-    }
+    override fun getItemCount(): Int = beerTypes.size
 
-    override fun onBindViewHolder(holder: BeerTypeViewHolder, position: Int) {
-        return holder.bind(beerTypes[position])
-    }
+    override fun onBindViewHolder(holder: BeerTypeViewHolder, position: Int) = holder.bind(beerTypes[position])
 
     fun setBeerTypes(beerTypes: List<BeerType>) {
         this.beerTypes = beerTypes

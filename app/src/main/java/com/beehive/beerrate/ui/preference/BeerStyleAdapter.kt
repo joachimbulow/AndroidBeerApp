@@ -10,7 +10,7 @@ import com.beehive.beerrate.model.BeerStyle
 class BeerStyleAdapter(private var beerStyles: List<BeerStyle>) :
     RecyclerView.Adapter<BeerStyleAdapter.BeerStyleViewHolder>() {
 
-    var edit = false
+    var editMode = false
 
     inner class BeerStyleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val beerStyleTextView: TextView = itemView.findViewById(R.id.beer_style_textView)
@@ -19,7 +19,7 @@ class BeerStyleAdapter(private var beerStyles: List<BeerStyle>) :
 
         fun bind(beerStyle: BeerStyle) {
             beerStyleTextView.text = beerStyle.name
-            if (!edit) {
+            if (!editMode) {
                 beerStyleTextView.setTextColor(-1979711488)
                 beerStyleDescriptionTextView.visibility = View.VISIBLE
                 beerStyleDescriptionTextView.text = beerStyle.description
@@ -54,13 +54,9 @@ class BeerStyleAdapter(private var beerStyles: List<BeerStyle>) :
         return BeerStyleViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
-        return beerStyles.size
-    }
+    override fun getItemCount(): Int = beerStyles.size
 
-    override fun onBindViewHolder(holder: BeerStyleViewHolder, position: Int) {
-        return holder.bind(beerStyles[position])
-    }
+    override fun onBindViewHolder(holder: BeerStyleViewHolder, position: Int) = holder.bind(beerStyles[position])
 
     fun setBeerStyles(beerStyles: List<BeerStyle>) {
         this.beerStyles = beerStyles
