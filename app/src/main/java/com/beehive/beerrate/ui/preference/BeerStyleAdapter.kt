@@ -19,6 +19,7 @@ class BeerStyleAdapter(private var beerStyles: List<BeerStyle>) : RecyclerView.A
             beerStyleTextView.text = beerStyle.name
             if (!editMode) {
                 beerStyleTextView.setTextColor(-1979711488)
+                beerStyleTextView.setOnClickListener {}
                 beerStyleDescriptionTextView.visibility = View.VISIBLE
                 beerStyleDescriptionTextView.text = beerStyle.description
                 var expanded = false
