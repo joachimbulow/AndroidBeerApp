@@ -75,7 +75,7 @@ class ExploreFragment : Fragment(), CardStackListener {
     override fun onCardDragging(direction: Direction?, ratio: Float) = Unit
 
     override fun onCardSwiped(direction: Direction?) {
-        if (direction == Direction.Left) {
+        if (direction == Direction.Right) {
             preferTopBeer(-1)
         }
     }

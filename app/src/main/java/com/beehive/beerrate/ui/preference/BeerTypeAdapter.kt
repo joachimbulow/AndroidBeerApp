@@ -9,8 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.beehive.beerrate.R
 import com.beehive.beerrate.model.BeerType
 
-class BeerTypeAdapter(private var beerTypes: List<BeerType>) : RecyclerView.Adapter<BeerTypeAdapter.BeerTypeViewHolder>() {
+class BeerTypeAdapter : RecyclerView.Adapter<BeerTypeAdapter.BeerTypeViewHolder>() {
 
+    private var beerTypes: List<BeerType> = emptyList()
     var editMode = false
 
     inner class BeerTypeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

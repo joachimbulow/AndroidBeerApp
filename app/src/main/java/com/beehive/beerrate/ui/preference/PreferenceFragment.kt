@@ -34,7 +34,7 @@ class PreferenceFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_preference, container, false)
 
         beerTypesRecyclerView = root.findViewById(R.id.preferences_types_of_beer_recyclerView)
-        beerTypesRecyclerView.adapter = BeerTypeAdapter(emptyList())
+        beerTypesRecyclerView.adapter = BeerTypeAdapter()
         beerTypesRecyclerView.layoutManager = LinearLayoutManager(activity)
 
         beerStylesRecyclerView = root.findViewById(R.id.preferences_styles_of_beer_recyclerView)
