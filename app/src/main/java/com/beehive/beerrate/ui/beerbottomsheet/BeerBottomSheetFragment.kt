@@ -1,7 +1,9 @@
 package com.beehive.beerrate.ui.beerbottomsheet
 
 import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +27,7 @@ class BeerBottomSheetFragment(private val beer: Beer) : BottomSheetDialogFragmen
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        Log.d("BottomSheet", "onCreateView")
         val root = inflater.inflate(R.layout.bottom_sheet_beer_dialog, container, false)
         // Using view/data binding to reduce the number of findViewById would be nice.
         val nameTextView = root.findViewById<TextView>(R.id.bottom_sheet_name_textview)
@@ -38,5 +41,55 @@ class BeerBottomSheetFragment(private val beer: Beer) : BottomSheetDialogFragmen
         userRatingTextView!!.text = DecimalFormat("#.##").format(beer.normalizedAverageReview)
         ratingBar!!.rating = beer.normalizedAverageReview.toFloat()
         return root
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        Log.d("BottomSheet", "onAttach")
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d("BottomSheet", "onCreate")
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        Log.d("BottomSheet", "onActivityCreated")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d("BottomSheet", "onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("BottomSheet", "onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("BottomSheet", "onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("BottomSheet", "onStop")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d("BottomSheet", "onDestroyView")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("BottomSheet", "onDestroy")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        Log.d("BottomSheet", "onDetach")
     }
 }

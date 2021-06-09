@@ -8,10 +8,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ExploreRepository @Inject constructor(
-    private val beerDao: BeerDao,
-    private val beerService: BeerService,
-) {
+class ExploreRepository @Inject constructor(private val beerDao: BeerDao, private val beerService: BeerService) {
 
     fun getAllNonPreferredBeers(): Flow<List<Beer>> {
         return beerDao.getAllNonPreferredBeers()

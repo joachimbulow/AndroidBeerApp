@@ -1,6 +1,7 @@
 package com.beehive.beerrate.ui.explore
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,7 +27,7 @@ class ExploreFragment : Fragment(), CardStackListener {
     private lateinit var prefButton: FloatingActionButton
     private lateinit var skipButton: FloatingActionButton
     private lateinit var infoButton: FloatingActionButton
-    private val manager by lazy { CardStackLayoutManager(activity, this) }
+    private val manager by lazy { CardStackLayoutManager(activity, this) } // initialized using the supplied lambda upon first use, unless a value had been previously assigned.
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -55,7 +56,7 @@ class ExploreFragment : Fragment(), CardStackListener {
 
         prefButton.setOnClickListener {
             cardStackView.swipe()
-            updateTopBeer(0)
+            preferTopBeer(0)
         }
 
         skipButton.setOnClickListener { cardStackView.swipe() }
@@ -75,15 +76,15 @@ class ExploreFragment : Fragment(), CardStackListener {
 
     override fun onCardSwiped(direction: Direction?) {
         if (direction == Direction.Left) {
-            updateTopBeer(-1)
+            preferTopBeer(-1)
         }
     }
 
-    private fun updateTopBeer(offset: Int) {
+    private fun preferTopBeer(offset: Int) {
         if (adapter.itemCount <= manager.topPosition) return
         val beer = adapter.getItem(manager.topPosition + offset)
         beer.preferred = true
-        viewModel.updateBeer(listOf(beer))
+        viewModel.updateBeer(beer)
 
     }
 

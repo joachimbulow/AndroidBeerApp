@@ -9,10 +9,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class BeerPreferenceRepository @Inject constructor(
-    private val beerTypeDao: BeerTypeDao,
-    private val beerStyleDao: BeerStyleDao
-) {
+class BeerPreferenceRepository @Inject constructor(private val beerTypeDao: BeerTypeDao, private val beerStyleDao: BeerStyleDao) {
 
     fun getBeerTypes(): Flow<List<BeerType>> {
         return beerTypeDao.getAll()

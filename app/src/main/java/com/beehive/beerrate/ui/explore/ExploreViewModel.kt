@@ -1,8 +1,7 @@
 package com.beehive.beerrate.ui.explore
 
-
-import android.os.AsyncTask
 import androidx.lifecycle.*
+import com.beehive.beerrate.async.UpdateBeerAsyncTask
 import com.beehive.beerrate.model.Beer
 import com.beehive.beerrate.repository.ExploreRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,16 +12,7 @@ class ExploreViewModel @Inject constructor(private val exploreRepository: Explor
 
     val allNonPreferredBeers = exploreRepository.getAllNonPreferredBeersRandomOrder().asLiveData()
 
-    fun updateBeer(beers: List<Beer>) {
-        UpdateBeerAsyncTask(exploreRepository).execute(*beers.toTypedArray())
-    }
-
-    companion object {
-        private class UpdateBeerAsyncTask(private val exploreRepository: ExploreRepository) : AsyncTask<Beer, Void, Void>() {
-            override fun doInBackground(vararg beers: Beer?): Void? {
-                beers.forEach { it?.let(exploreRepository::updateBeer) }
-                return null
-            }
-        }
+    fun updateBeer(beer: Beer) {
+        UpdateBeerAsyncTask(exploreRepository).execute(beer)
     }
 }

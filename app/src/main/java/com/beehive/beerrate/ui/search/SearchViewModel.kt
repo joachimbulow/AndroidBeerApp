@@ -1,7 +1,7 @@
 package com.beehive.beerrate.ui.search
 
-import android.os.AsyncTask
 import androidx.lifecycle.*
+import com.beehive.beerrate.async.UpdateBeerAsyncTask
 import com.beehive.beerrate.model.Beer
 import com.beehive.beerrate.repository.ExploreRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,16 +22,6 @@ class SearchViewModel @Inject constructor(private val exploreRepository: Explore
     }
 
     fun updateBeer(beer: Beer) {
-        UpdateBeerAsyncTask(exploreRepository, beer).execute()
-    }
-
-    companion object {
-        private class UpdateBeerAsyncTask(private val exploreRepository: ExploreRepository, private val beer: Beer) : AsyncTask<Beer, Void, Void>() {
-            override fun doInBackground(vararg beer: Beer?): Void? {
-                exploreRepository.updateBeer(this.beer)
-                return null
-            }
-
-        }
+        UpdateBeerAsyncTask(exploreRepository).execute(beer)
     }
 }
