@@ -27,7 +27,7 @@ class BeerTypeAdapter(private var beerTypes: List<BeerType>) : RecyclerView.Adap
                 }
             } else {
                 beerTypeTextView.text = itemView.resources.getString(R.string.beer_type, "", beerType.type)
-                beerTypeTextView.setTextColor(-1979711488)
+                beerTypeTextView.setTextColor(-1979711488) // Default gray text color.
                 beerTypeTextView.setOnClickListener {}
             }
         }
