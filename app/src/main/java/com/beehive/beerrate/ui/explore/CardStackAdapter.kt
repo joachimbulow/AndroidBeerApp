@@ -20,6 +20,7 @@ class CardStackAdapter(private var beers: List<Beer> = emptyList()) : RecyclerVi
         fun bind(beer: Beer) {
             Glide.with(image).load(beer.imageUrl).into(image)
             beerName.text = beer.beerName
+            // Should be a string resource
             location.text = "${beer.city}, ${beer.name}"
         }
     }

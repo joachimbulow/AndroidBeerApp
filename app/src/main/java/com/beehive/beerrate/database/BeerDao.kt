@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 interface BeerDao {
 
     @Query("SELECT * FROM beers WHERE preferred = 0")
-    fun getAllNonPreferredBeers(): Flow<List<Beer>>
+    fun getAllNonPreferredBeers(): Flow<List<Beer>> // Flow - whenever a beer in the database is updated, then the entire list of beers is emitted again. Keeps UI up to date. (Entire query needs to be re-executed as SQLite only supports table level notification)
 
     @Query("SELECT * FROM beers WHERE beerstyle_id IN (SELECT beerstyle_id FROM beerstyles WHERE preferred = 1) AND preferred = 0 ORDER BY RANDOM() LIMIT 100")
     fun getAllNonPreferredBeersRandomOrder(): Flow<List<Beer>>

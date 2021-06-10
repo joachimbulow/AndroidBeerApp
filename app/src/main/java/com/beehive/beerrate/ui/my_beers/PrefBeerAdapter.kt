@@ -42,20 +42,10 @@ class PrefBeerAdapter(var beers: List<Beer>, val fragmentManager: FragmentManage
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
-                val tempList = mutableListOf<Beer>()
-                val search = constraint.toString().toLowerCase().trim()
-                if (search.isEmpty()) {
-                    tempList.addAll(beers as MutableList<Beer>)
-                } else {
-                    for (beer in beers) {
-                        if (beer.beerName.toLowerCase(Locale.ROOT).contains(search)) {
-                            tempList.add(beer)
-                        }
-                    }
+                val search = constraint.toString().toLowerCase(Locale.ROOT).trim()
+                return FilterResults().apply {
+                    values = if (search.isEmpty()) beers else beers.filter { beer -> beer.beerName.toLowerCase(Locale.ROOT).contains(search) }
                 }
-                val filterResults = FilterResults()
-                filterResults.values = tempList
-                return filterResults
             }
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
@@ -63,7 +53,6 @@ class PrefBeerAdapter(var beers: List<Beer>, val fragmentManager: FragmentManage
                 filteredBeers.addAll(results!!.values as Collection<Beer>)
                 notifyDataSetChanged()
             }
-
         }
     }
 }

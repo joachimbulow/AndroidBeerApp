@@ -11,4 +11,6 @@ abstract class BeerPreferenceDatabase : RoomDatabase() {
     abstract fun beerTypeDao(): BeerTypeDao
     abstract fun beerStyleDao(): BeerStyleDao
     abstract fun beerDao(): BeerDao
+
+    // No get instance companion as we use Dagger Hilt dependency injection. See AppModule.
 }

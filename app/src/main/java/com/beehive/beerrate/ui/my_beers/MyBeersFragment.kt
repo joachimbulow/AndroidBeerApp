@@ -21,7 +21,7 @@ class MyBeersFragment : Fragment() {
     private lateinit var adapter: PrefBeerAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Makes sure the onCreateOptionsMenu is invoked.
+        // Makes sure the onCreateOptionsMenu is invoked to enable the search button in the top right.
         setHasOptionsMenu(true)
         myBeersViewModel = ViewModelProvider(this).get(MyBeersViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_my_beers, container, false)

@@ -21,7 +21,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideBeerPreferenceDatabase(@ApplicationContext app: Context) =
+    fun provideBeerPreferenceDatabase(@ApplicationContext app: Context): BeerPreferenceDatabase =
         Room.databaseBuilder(app, BeerPreferenceDatabase::class.java, "beerdb")
             .createFromAsset("database/beerdb.db")
             .build()

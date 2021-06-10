@@ -36,6 +36,7 @@ class BeerBottomSheetFragment(private val beer: Beer) : BottomSheetDialogFragmen
         val userRatingTextView = root.findViewById<TextView>(R.id.bottom_sheet_user_rating)
         val ratingBar = root.findViewById<RatingBar>(R.id.ratingBar)
         nameTextView!!.text = beer.beerName.trim()
+        // Should be a string resource.
         locationAndManfTextView!!.text = "Made by ${beer.brewerName} from ${beer.city}, ${beer.name}".trim()
         descriptionTextView!!.text = beer.description
         userRatingTextView!!.text = DecimalFormat("#.##").format(beer.normalizedAverageReview)

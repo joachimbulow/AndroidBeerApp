@@ -48,8 +48,8 @@ class ExploreFragment : Fragment(), CardStackListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.allNonPreferredBeers.observeOnce(viewLifecycleOwner, Observer { t ->
-            adapter = CardStackAdapter(t)
+        viewModel.allNonPreferredBeers.observeOnce(viewLifecycleOwner, Observer { beers ->
+            adapter = CardStackAdapter(beers)
             cardStackView.adapter = adapter
             checkCount()
         })

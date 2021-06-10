@@ -55,5 +55,4 @@ class BeerAdapter(var beers: List<Beer>, var viewmodel: SearchViewModel, val fra
     private fun toggleBeerPreference(beer: Beer) {
         beer.preferred = !beer.preferred
     }
-
 }
